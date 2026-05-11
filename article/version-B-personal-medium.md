@@ -22,7 +22,7 @@ Nobody had a clean answer. The engineer who'd built it had moved teams. The serv
 
 This is the field report. What we learned about scaling agentic systems, what changed in the Google Cloud agent stack, and — the part most architects haven't internalized yet — why the identity governance layer above the runtime is where production agentic systems actually live or die.
 
-![Trajectory: from one agent to forty-seven](figure-1-trajectory.svg)
+![Trajectory: from one agent to forty-seven](png-for-medium/figure-1-trajectory.png)
 *Figure 1. The fifteen-month journey. Each platform decision was right alone. The aggregate became the problem.*
 
 ---
@@ -58,7 +58,7 @@ Six months in, the data team wanted an agent that could pull customer history. I
 
 None of these decisions were wrong individually. Each platform was the right tool for that team's job. The problem only became visible when our orchestrator agent on Vertex AI started calling all of them — and we sat down to draw the access map.
 
-![Cross-platform agent call graph](figure-2-cross-platform-call-graph.svg)
+![Cross-platform agent call graph](png-for-medium/figure-2-cross-platform-call-graph.png)
 *Figure 2. The same user request fans out across four agent platforms. Each platform sees its own slice; no single platform sees the chain.*
 
 A user request entered through our Google Cloud-hosted coordinator. From there, it fanned out to four platforms, each with its own identity model, its own audit logs, its own policy engine. The coordinator's blast radius wasn't what we'd granted the coordinator's service account. It was the union of every transitively reachable permission — across four clouds.
@@ -69,7 +69,7 @@ We could answer it. Eventually. With trace IDs, log joins, and a full afternoon.
 
 > Governance tells you the answer before the question is asked. Forensics is what helps you answer it after the auditor walks in.
 
-![Anatomy of a silent agent failure](figure-3-silent-failure-loop.svg)
+![Anatomy of a silent agent failure](png-for-medium/figure-3-silent-failure-loop.png)
 *Figure 3. The visible bug was a bad citation. The deeper failure was an agent identity with no clear human owner, review cadence, or accountability path.*
 
 ---
@@ -90,7 +90,7 @@ Unlike a shared service account, this identity is tied to a specific agent resou
 
 The rest of the runtime stack rounds out the picture: **Gemini Enterprise agent management** centralizes administration; **IAM + A2A authorization** controls agent-to-agent and agent-to-tool access; **Model Armor** screens prompts and responses for prompt injection and sensitive-data leakage; **Cloud Logging and Security Command Center** surface the security posture across cloud and SaaS environments — extended by **Wiz** to AWS Bedrock AgentCore, Microsoft Copilot Studio, Salesforce Agentforce, and Databricks.
 
-![Google Cloud runtime governance stack](figure-4-gcp-runtime-stack.svg)
+![Google Cloud runtime governance stack](png-for-medium/figure-4-gcp-runtime-stack.png)
 *Figure 4. Google Cloud's runtime layer now gives architects a much stronger foundation: identity, authorization, runtime protection, logging, and security posture. Lifecycle ownership still sits above it.*
 
 For enterprise teams shipping agents in 2026, this combination handles a substantial portion of the **runtime** governance and security posture problem. If your entire agentic estate lives inside Gemini Enterprise Agent Platform — and you can rely on Wiz for cross-platform security visibility — much of the runtime side is solved.
@@ -197,7 +197,7 @@ So far, so good. We had cryptographic identities, runtime controls, and a tracta
 
 ## Two layers, two scopes — and why the second one is what made the difference
 
-![Two layers, two scopes](figure-5-two-layers-two-scopes.svg)
+![Two layers, two scopes](png-for-medium/figure-5-two-layers-two-scopes.png)
 *Figure 5. Layer 1 (runtime governance and security posture) is well-served natively by Google Cloud and Wiz. Layer 2 (identity lifecycle governance) is the IGA discipline.*
 
 **Layer 1: Runtime governance and security posture.** The stack from the previous section answers: who is this agent cryptographically? What is it allowed to do at runtime? Is its behavior anomalous? What's the security posture of the cloud and SaaS environment around the agent?
@@ -270,12 +270,12 @@ async def get_identity() -> AgentIdentity:
 
 Hit that endpoint against a live deployment and you get the JSON envelope an IGA connector ingests, ready to normalize into the rest of the identity graph:
 
-![Live response from /.well-known/agent-identity](figure-6-identity-envelope.png)
+![Live response from /.well-known/agent-identity](png-for-medium/figure-6-identity-envelope.png)
 *Figure 6. Live response from `/.well-known/agent-identity` on the reference implementation. The native workload principal is preserved, classification and `data_scopes` constitute the runtime boundary, and `owner_email` / `fallback_owner_email` anchor the human accountability above it.*
 
 **Pattern B: SaaS-hosted agents (Agentforce, Copilot Studio, Bedrock AgentCore).** You can't deploy a custom FastAPI route on a SaaS platform. The metadata flows through the platform's own admin API, ingested by the IGA's native connector for that platform.
 
-![The bridge architecture](figure-7-bridge-architecture.svg)
+![The bridge architecture](png-for-medium/figure-7-bridge-architecture.png)
 *Figure 7. Native cryptographic identities from each platform are wrapped in a common metadata envelope, exposed at a well-known endpoint or pulled via platform APIs, and aggregated into a single IGA control plane.*
 
 This pattern preserves Google's Agent Engine identity and the native identity of every SaaS platform. It augments them with ownership, classification, lifecycle metadata, and business context that runtime identity systems do not normally store and were never designed to store.
@@ -300,7 +300,7 @@ For that shape, the partner IGA I advocate is [**SailPoint Agent Identity Securi
 
 In this architecture, **SailPoint Agent Identity Security** and **Google's Gemini Enterprise Agent Platform** are complementary, not competing — Google governs the runtime, SailPoint governs the lifecycle, Wiz extends security posture across platforms.
 
-![From runtime identity to lifecycle governance](figure-8-sailpoint-integration.svg)
+![From runtime identity to lifecycle governance](png-for-medium/figure-8-sailpoint-integration.png)
 *Figure 8. The two layers in one picture. Layer 1 (Google Cloud runtime) provides cryptographic identity, authorization, runtime protection, and evidence. Layer 2 (SailPoint Agent Identity Security on Atlas, integrated with Identity Security Cloud) provides ownership, certification, SoD checks, and a unified governed view — anchored in the HR system that already drives human identity lifecycle.*
 
 The procurement test that closes the conversation: the moment internal audit asks, *"can the agent owner attest to this access the same way they attest to a service account?"*, the only answer that ends the meeting is *"yes, in the same SailPoint certification campaign."* For a regulated FS shop already running SailPoint for humans, that is worth more than any agent-specific tool standing alone.
@@ -315,7 +315,7 @@ When an engineer leaves the company, the HR system fires the offboarding event. 
 
 When the next quarterly audit comes around and the auditor asks the cross-platform question — *who can ultimately cause a write to that customer table?* — the answer is a query against the unified governed view, returnable in seconds instead of an afternoon of forensic log joins.
 
-![Audit answer as identity graph](figure-9-audit-answer-graph.svg)
+![Audit answer as identity graph](png-for-medium/figure-9-audit-answer-graph.png)
 *Figure 9. The auditor's question becomes tractable when human ownership, delegated user context, agent-to-agent calls, and target data scopes live in one graph.*
 
 A behavioural pattern that emerged alongside the audit story is worth naming, because it is the runtime consequence of the same architecture: **honest refusal**. When agents respect their declared `data_scopes` — the same scopes that drive the IGA's classification and certification cadence — they decline questions that fall outside those scopes and surface the limit explicitly to the user, rather than improvising.
@@ -326,10 +326,10 @@ In one of our test invocations, an analyst asked the `data_agent` who could writ
 
 The Layer 1 / Layer 2 boundary shows up not as an abstract architecture diagram, but as the closing paragraph of the agent's own response. The agent knows what it is, knows what it can read, and names what sits above it — IAM and security configuration — as somebody else's job. That "somebody else" is the identity governance layer.
 
-![ADK trace of a coordinator invocation](figure-10-trace.png)
+![ADK trace of a coordinator invocation](png-for-medium/figure-10-trace.png)
 *Figure 10. ADK trace of a single coordinator invocation captured in the playground. The span tree shows the full call graph — coordinator → data_agent → list_tables → describe_table → bigquery_query — with per-span latency. The sidebar exposes the `invocation_id`, the agent name, and the per-session `rate_limit.count` written by the `before_model_callback`. Every visible row also lands in Cloud Logging as a structured JSON event, joinable by `invocation_id`.*
 
-![Agent response with honest refusal in Caveats](figure-11-honest-refusal.png)
+![Agent response with honest refusal in Caveats](png-for-medium/figure-11-honest-refusal.png)
 *Figure 11. The reporter agent's final brief, materializing the architecture's intent. The bullets tag the source of each finding (`[data]`), the **Numbers** table makes cost transparent, and the **Caveats** section makes the Layer 1 boundary explicit — the agent knows what it cannot answer with the scope it was given.*
 
 When a platform team wants to add a new shared agent, the certification cadence and ownership pattern are already in place. The new agent joins the same governance plane as everything else from day one.
@@ -340,7 +340,7 @@ The agents keep doing useful work. The systems are still hard. What this archite
 
 ## Where you might be in this journey
 
-![Decision matrix](figure-12-decision-matrix.svg)
+![Decision matrix](png-for-medium/figure-12-decision-matrix.png)
 *Figure 12. Native runtime governance is enough for narrow scope. Most enterprise environments hit at least three of the right-hand criteria — and that is where the IGA layer becomes load-bearing.*
 
 **Native Google Cloud governance plus Wiz for cross-platform security can be enough when:**
