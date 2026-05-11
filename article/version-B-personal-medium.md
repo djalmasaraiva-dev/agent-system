@@ -5,10 +5,7 @@
 **By Djalma Junior** (Head of Google Cloud Architecture, GFT Technologies).
 
 > **TL;DR**
-> - Twelve AI agents become forty-seven faster than your governance does.
 > - The current Google Cloud agent stack now solves the **runtime** identity problem cleanly: SPIFFE-anchored Agent Identity for Vertex AI Agent Engine, IAM + A2A authorization, Model Armor, Cloud Logging, plus Wiz for cross-platform posture.
-> - The **lifecycle** layer — who owns the agent, when it expires, who certifies it, who inherits ownership at offboarding — is still partner IGA territory. Getting it wrong is what kills initiatives.
-> - For Financial Services shops already standardized on SailPoint, the architectural shape I advocate is **SailPoint Agent Identity Security** on the Atlas platform, integrated with Identity Security Cloud and Data Access Security.
 > - Companion open-source code (Apache 2.0): **[github.com/djalmasaraiva-dev/agent-system](https://github.com/djalmasaraiva-dev/agent-system)** — 4 ADK agents, cost-guarded BigQuery tool, `/.well-known/agent-identity` bridge with IAP JWT verification, 62 unit tests.
 
 > *This article synthesizes patterns I have observed across multiple Financial Services engagements with ADK and Gemini-based agentic systems on Google Cloud. Project IDs, table names, and agent owner identifiers in the snippets and figures are placeholders. Numerical claims — agent counts, audit-response times, dataset sizes — are representative of those engagements rather than a single customer.*
@@ -206,12 +203,10 @@ So far, so good. We had cryptographic identities, runtime controls, and a tracta
 
 ## Two layers, two scopes — and why the second one is what made the difference
 
-It is worth being precise about what Google's runtime stack — including Wiz — covers, and what remains an identity governance problem.
-
 ![Two layers, two scopes](figure-3-two-layers-two-scopes.svg)
 *Figure 5. Layer 1 (runtime governance and security posture) is well-served natively by Google Cloud and Wiz. Layer 2 (identity lifecycle governance) is the IGA discipline.*
 
-**Layer 1: Runtime governance and security posture.** Agent Identity, IAM, A2A authorization, Gemini Enterprise agent management, logging, Model Armor, Security Command Center, and Wiz together cover this layer. They answer: who is this agent cryptographically? What is it allowed to do at runtime? Is its behavior anomalous? What's the security posture of the cloud and SaaS environment around the agent?
+**Layer 1: Runtime governance and security posture.** The stack from the previous section answers: who is this agent cryptographically? What is it allowed to do at runtime? Is its behavior anomalous? What's the security posture of the cloud and SaaS environment around the agent?
 
 For Layer 1, the Google Cloud + Wiz combination is now a strong native answer.
 
@@ -224,7 +219,7 @@ For Layer 1, the Google Cloud + Wiz combination is now a strong native answer.
 - Have the agent's **data scopes** been reviewed against the company's separation-of-duties matrix?
 - Has access been **revoked when scheduled**, automatically, with an attestation trail?
 
-These questions look nothing like Layer 1 questions. They are not about cryptography or runtime policy. They are about the **connection between the agent identity and the human organization that the identity must answer to**. They are the domain that enterprise Identity Governance and Administration (IGA) platforms have served for human identities for two decades.
+These questions look nothing like Layer 1 questions. They are about the **connection between the agent identity and the human organization that the identity must answer to**. They are the domain that enterprise Identity Governance and Administration (IGA) platforms have served for human identities for two decades.
 
 When I look at organizations stalling on agentic AI, this is almost always where it stalls. They build strong runtime governance — because that's where the technical incentives push — and weak audit posture, because that requires an operating discipline most engineering teams don't have. Or the inverse: traditional IGA mature shops that haven't put the agent on the same control plane as their employees, and end up with two parallel governance worlds.
 
@@ -234,7 +229,7 @@ I have come to think of this as the single most under-discussed architectural qu
 
 ## The bridge: making agent identities portable
 
-The cross-platform identity lifecycle problem requires every agent's identity to be exposed in a portable format an upstream IGA can aggregate. The goal is not to replace each platform's native identity. It is to **preserve** that native identity and **attach** the lifecycle metadata the enterprise needs to govern it. Two patterns matter, depending on where the agent runs.
+The goal is not to replace each platform's native identity. It is to **preserve** that native identity and **attach** the lifecycle metadata the enterprise needs to govern it. Two patterns matter, depending on where the agent runs.
 
 **Pattern A: self-hosted agents (ADK on Cloud Run, Cloud Run + custom runtime, GKE).** Expose a well-known endpoint that returns the agent's metadata envelope:
 
@@ -343,7 +338,7 @@ The Layer 1 / Layer 2 boundary shows up not as an abstract architecture diagram,
 ![Agent response with honest refusal in Caveats](figure-10-honest-refusal.png)
 *Figure 10. The reporter agent's final brief, materializing the architecture's intent. The bullets tag the source of each finding (`[data]`), the **Numbers** table makes cost transparent, and the **Caveats** section makes the Layer 1 boundary explicit — the agent knows what it cannot answer with the scope it was given.*
 
-When a platform team wants to add a new shared agent, the certification cadence and ownership pattern are already in place. The new agent joins the same governance plane as everything else from day one. Within Google Cloud, Agent Engine identity, IAM, Gemini Enterprise agent management, logging, and Model Armor handle the runtime governance layer. Wiz contributes cross-platform security posture. Above them, SailPoint Agent Identity Security handles the human-organization lifecycle.
+When a platform team wants to add a new shared agent, the certification cadence and ownership pattern are already in place. The new agent joins the same governance plane as everything else from day one.
 
 The agents keep doing useful work. The systems are still hard. What this architecture escapes is the moment where complexity meets unaccountability.
 
@@ -380,7 +375,7 @@ The threshold matters less than the trajectory. If you're going to scale agentic
 
 The 47-day bug that started this story was, eventually, just a code change. The harder fix was the system around it: an agent without a documented owner, in production without a review cadence, on a platform that didn't have HR-side accountability built in. That class of incident — the one that wastes an afternoon on forensic reconstruction and surfaces a structural gap behind a tactical bug — is what the new governance stack is built to make rare.
 
-The current Google Cloud agent stack materially narrows that gap. Agent Engine identity, IAM, Gemini Enterprise agent management, logging, Model Armor, Security Command Center, and Wiz together mean the runtime governance and security posture questions have real answers, even while several agent-specific capabilities remain Preview. The remaining work — and it is real, structural work — sits in the identity lifecycle layer: who owns the agent, when does it expire, has it been certified, can the auditor see the chain of approval across clouds.
+The current Google Cloud agent stack materially narrows that gap. The remaining structural work — who owns the agent, when does it expire, has it been certified, can the auditor see the chain of approval across clouds — sits in the identity lifecycle layer.
 
 For the architectural shape this article describes, that work lands cleanly on **SailPoint Agent Identity Security**, built on the SailPoint Atlas platform and anchored in the same Identity Security Cloud that already governs employees in most regulated FS shops. For the cross-cloud entitlement surface this architecture inevitably creates, **SailPoint Cloud Infrastructure Entitlement Management (CIEM)** is the complementary product — extending the same Atlas-based governance to the IAM entitlements each agent's underlying service principal holds in AWS, Azure, and GCP. Other Google Cloud customers will reasonably choose differently; what matters is the architectural shape, not the brand in the lifecycle slot.
 
