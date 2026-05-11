@@ -4,7 +4,7 @@
 
 **By Djalma Junior** (Head of Google Cloud Architecture, GFT Technologies).
 
-> *This article synthesizes patterns I have observed across multiple Financial Services engagements with ADK and Gemini-based agentic systems on Google Cloud. Project IDs, table names, and agent owner identifiers in the snippets and figures are placeholders. Numerical claims — agent counts, audit-response times, dataset sizes — are representative of those engagements rather than a single customer.*
+> *This article synthesizes patterns I have observed across multiple Financial Services engagements with ADK and Gemini-based agentic systems on Google Cloud. Project IDs, table names, and agent owner identifiers in the snippets and figures are placeholders. Numerical claims (agent counts, audit-response times, dataset sizes) are representative of those engagements rather than a single customer.*
 
 ---
 
@@ -12,15 +12,15 @@
 
 The first agent we shipped to production ran for sixty days before anyone noticed the bug.
 
-It wasn't dramatic. The agent — a research assistant for the risk analytics team at an enterprise financial services customer — had been recommending document references that didn't quite exist. Hallucinated citations, written in confident prose, attached to outputs nobody reviewed line-by-line. The team only caught it when an analyst tried to look up one of those references for a regulator filing.
+Nothing about it looked dramatic. The agent was a research assistant for the risk analytics team at a financial services customer, and it had been recommending document references that didn't quite exist. Hallucinated citations, written in confident prose, attached to outputs nobody reviewed line by line. The team only caught it when an analyst tried to look up one of those references for a regulator filing.
 
 Sixty days. The fix took an hour. The conversation it triggered took six months.
 
 The question that came out of that incident wasn't *how do we fix the agent?* It was: *Who owns this agent? What else is it doing? Would we even know if it failed differently next time?*
 
-Nobody had a clean answer. The engineer who'd built it had moved teams. The service account ran under a shared identity. Our monitoring covered the GCP infrastructure perfectly — and said nothing about the agent's reasoning. We had twelve agents in production at that point. Nine months later we had forty-seven, across four teams and three different agent platforms.
+Nobody had a clean answer. The engineer who'd built it had moved teams. The service account ran under a shared identity. Our monitoring covered the GCP infrastructure perfectly, and said nothing about the agent's reasoning. We had twelve agents in production at that point. Nine months later we had forty-seven, across four teams and three different agent platforms.
 
-This is the field report. What we learned about scaling agentic systems, what changed in the Google Cloud agent stack, and — the part most architects haven't internalized yet — why the identity governance layer above the runtime is where production agentic systems actually live or die.
+This is the field report. We cover what we learned scaling agentic systems, what's changed in the Google Cloud agent stack, and the thing most architects on our side of the industry haven't fully internalized yet: the identity governance layer above the runtime is where production agentic systems either hold up or fall apart over time.
 
 ![Trajectory: from one agent to forty-seven](png-for-medium/figure-1-trajectory.png)
 *Figure 1. The fifteen-month journey. Each platform decision was right alone. The aggregate became the problem.*
@@ -44,15 +44,15 @@ The second is from the [SailPoint and Dimensional Research survey](https://www.s
 
 Those numbers match what I have been seeing in regulated financial services for the past two years.
 
-The companies abandoning agentic AI initiatives by 2027 won't be doing so because the agents don't work. They'll be doing it because the systems became too costly, too hard to justify, or — most often, in my experience — **too difficult to govern**.
+Companies that abandon agentic AI by 2027 won't quit because the agents don't work. They'll quit because the systems got too expensive to run, hard to justify on ROI, or — and this is the one I see most often — **impossible to govern in the way auditors expect**.
 
-Identity is the load-bearing fundamental on that last category. The seams across platforms are where most of the unintended actions happen. Every agent that doesn't have a clear human owner is a future incident waiting for an auditor.
+Identity is one of the fundamentals on that last bucket, and it's the one most teams underinvest in. The seams across platforms are where most of the unintended actions happen. Every agent without a clear human owner is a future incident waiting for an auditor.
 
 ---
 
 ## How twelve agents became forty-seven (and started crossing platforms)
 
-The trajectory was unglamorous, the way most production stories are.
+There was no dramatic inflection point. Things just kept getting added.
 
 Six months in, the data team wanted an agent that could pull customer history. It made sense to put it in **Salesforce Agentforce** — that's where the CRM lived. Then the compliance team built a policy-checker on **Microsoft Copilot Studio**, because that's what their last vendor consolidation pushed them toward. Six weeks later, an enterprise notification agent went up on **AWS Bedrock AgentCore** as part of a shared services initiative.
 
@@ -61,11 +61,11 @@ None of these decisions were wrong individually. Each platform was the right too
 ![Cross-platform agent call graph](png-for-medium/figure-2-cross-platform-call-graph.png)
 *Figure 2. The same user request fans out across four agent platforms. Each platform sees its own slice; no single platform sees the chain.*
 
-A user request entered through our Google Cloud-hosted coordinator. From there, it fanned out to four platforms, each with its own identity model, its own audit logs, its own policy engine. The coordinator's blast radius wasn't what we'd granted the coordinator's service account. It was the union of every transitively reachable permission — across four clouds.
+A user request entered through our Google Cloud-hosted coordinator. From there it fanned out to four platforms, each with its own identity model, its own audit logs, its own policy engine. The coordinator's blast radius wasn't what we'd granted the coordinator's service account. It was the union of every transitively reachable permission across four clouds.
 
 The auditor's question came soon after: *who in your organization can ultimately cause a write to that customer table?*
 
-We could answer it. Eventually. With trace IDs, log joins, and a full afternoon. That isn't governance. That's forensics.
+We could answer it. Eventually. It took trace IDs, log joins, and a full afternoon of someone's day to put the chain back together.
 
 > Governance tells you the answer before the question is asked. Forensics is what helps you answer it after the auditor walks in.
 
@@ -191,7 +191,7 @@ Wired this way, every tool invocation emits a structured JSON record through ADK
 
 That log shape is exactly what makes the auditor's question answerable in seconds rather than an afternoon. A SQL query against Cloud Logging joined on `agent` and `invocation_id` returns the full call graph for any data access. Argument *keys* are logged, not values — keeping PII out of the audit trail by default.
 
-So far, so good. We had cryptographic identities, runtime controls, and a tractable audit log. We still didn't have governance.
+So far, so good. We had cryptographic identities, runtime controls, and an audit log we could actually query. What we still didn't have was governance.
 
 ---
 
@@ -217,7 +217,7 @@ These questions look nothing like Layer 1 questions. They are about the **connec
 
 When I look at organizations stalling on agentic AI, this is almost always where it stalls. They build strong runtime governance — because that's where the technical incentives push — and weak audit posture, because that requires an operating discipline most engineering teams don't have. Or the inverse: traditional IGA mature shops that haven't put the agent on the same control plane as their employees, and end up with two parallel governance worlds.
 
-I have come to think of this as the single most under-discussed architectural question in production agentic AI right now.
+It's the gap I see most often when teams talk about getting agentic AI into production, and almost never as the headline topic.
 
 ---
 
@@ -294,7 +294,7 @@ For that shape, the partner IGA I advocate is [**SailPoint Agent Identity Securi
 
 **A single governed view across clouds.** SailPoint positions Agent Identity Security as bringing "AI agents, their users, and the tools they access together in one governed view." In practice, the cross-platform chain — human → coordinator (Google) → customer_history_agent (Agentforce) → BigQuery — becomes a single graph traversable as a query, not a four-hour log-join investigation.
 
-**Agents as first-class identities in the same control plane as humans.** This is the property that matters most. SailPoint has run JML, certification campaigns, SoD, and access reviews for over two decades, with the regulatory hardening to match. Treating the agent as a first-class identity inside the same ISC machinery that governs human identities — instead of building parallel governance for AI — is the natural shape. The moment an HR-fired offboarding event reassigns every agent the leaver owned to the documented fallback and triggers immediate re-certification, **orphan agents stop existing as a category**. That single property is what makes the IGA layer load-bearing rather than nice-to-have.
+**Agents as first-class identities in the same control plane as humans.** This is the bullet I'd lead with if I had to pick one. SailPoint has run JML, certification campaigns, SoD, and access reviews for over two decades, with the regulatory hardening to show for it. Treating the agent as a first-class identity inside the same ISC machinery that governs human identities, instead of building parallel governance for AI, is the natural shape. The moment an HR-fired offboarding event reassigns every agent the leaver owned to the documented fallback and triggers immediate re-certification, **orphan agents stop existing as a category**. That single property is what turns the IGA layer from "nice to have on the slide deck" into a piece of the operation people actually rely on.
 
 **Certifications and SoD policies auditors already recognize.** Quarterly attestations, succession planning, and SoD checks are not new artifacts for AI — they are the same ones SailPoint's Compliance Management module has been encoding for human identities for two decades, now applied to a new class of identity. An early coordinator agent that, via transitively reachable tool permissions, can both initiate and approve the same write path is an SoD policy violation by another name, applied to a non-human principal. Most engineering teams have not yet named this class of risk; the IGA discipline has.
 
@@ -309,16 +309,16 @@ The procurement test that closes the conversation: the moment internal audit ask
 
 ## What changes when this architecture is in place
 
-Six months after an IGA layer like this goes in alongside native Google Cloud runtime governance, the operating picture is materially different.
+Six months in, with an IGA layer running alongside the Google Cloud runtime governance, day-to-day operations look different in a few concrete ways.
 
 When an engineer leaves the company, the HR system fires the offboarding event. SailPoint Agent Identity Security reassigns every agent they owned to the documented fallback owner automatically and triggers an immediate re-certification. Orphan agents stop existing as a category.
 
 When the next quarterly audit comes around and the auditor asks the cross-platform question — *who can ultimately cause a write to that customer table?* — the answer is a query against the unified governed view, returnable in seconds instead of an afternoon of forensic log joins.
 
 ![Audit answer as identity graph](png-for-medium/figure-9-audit-answer-graph.png)
-*Figure 9. The auditor's question becomes tractable when human ownership, delegated user context, agent-to-agent calls, and target data scopes live in one graph.*
+*Figure 9. The auditor's question becomes answerable as a query when human ownership, delegated user context, agent-to-agent calls, and target data scopes live in one graph.*
 
-A behavioural pattern that emerged alongside the audit story is worth naming, because it is the runtime consequence of the same architecture: **honest refusal**. When agents respect their declared `data_scopes` — the same scopes that drive the IGA's classification and certification cadence — they decline questions that fall outside those scopes and surface the limit explicitly to the user, rather than improvising.
+A behavior pattern that showed up alongside the audit story is worth flagging, because it falls out of the same architecture: **honest refusal**. When agents respect their declared `data_scopes` (the same scopes that drive the IGA's classification and certification cadence), they decline questions that fall outside those scopes and surface the limit explicitly to the user, instead of improvising.
 
 In one of our test invocations, an analyst asked the `data_agent` who could write to a customer table. The reply was almost clinical:
 
@@ -334,14 +334,14 @@ The Layer 1 / Layer 2 boundary shows up not as an abstract architecture diagram,
 
 When a platform team wants to add a new shared agent, the certification cadence and ownership pattern are already in place. The new agent joins the same governance plane as everything else from day one.
 
-The agents keep doing useful work. The systems are still hard. What this architecture escapes is the moment where complexity meets unaccountability.
+The agents keep doing useful work. The systems are still hard to operate. The difference is that nothing important is unaccounted for anymore.
 
 ---
 
 ## Where you might be in this journey
 
 ![Decision matrix](png-for-medium/figure-12-decision-matrix.png)
-*Figure 12. Native runtime governance is enough for narrow scope. Most enterprise environments hit at least three of the right-hand criteria — and that is where the IGA layer becomes load-bearing.*
+*Figure 12. Native runtime governance is enough for narrow scope. Most enterprise environments hit at least three of the right-hand criteria, and that's where the IGA layer earns its keep.*
 
 **Native Google Cloud governance plus Wiz for cross-platform security can be enough when:**
 
@@ -369,11 +369,11 @@ The threshold matters less than the trajectory. If you're going to scale agentic
 
 The 60-day bug that started this story was, eventually, just a code change. The harder fix was the system around it: an agent without a documented owner, in production without a review cadence, on a platform that didn't have HR-side accountability built in. That class of incident — the one that wastes an afternoon on forensic reconstruction and surfaces a structural gap behind a tactical bug — is what the new governance stack is built to make rare.
 
-The current Google Cloud agent stack materially narrows that gap. The remaining structural work — who owns the agent, when does it expire, has it been certified, can the auditor see the chain of approval across clouds — sits in the identity lifecycle layer.
+The current Google Cloud agent stack narrows that gap quite a bit. What's left to design for sits in the identity lifecycle layer: who owns the agent, when does it expire, has it been certified, can the auditor see the chain of approval across clouds.
 
 For the architectural shape this article describes, that work lands cleanly on **SailPoint Agent Identity Security**, built on the SailPoint Atlas platform and anchored in the same Identity Security Cloud that already governs employees in most regulated FS shops. For the cross-cloud entitlement surface this architecture inevitably creates, **SailPoint Cloud Infrastructure Entitlement Management (CIEM)** is the complementary product — extending the same Atlas-based governance to the IAM entitlements each agent's underlying service principal holds in AWS, Azure, and GCP. Other Google Cloud customers will reasonably choose differently; what matters is the architectural shape, not the brand in the lifecycle slot.
 
-There is a recursive elegance worth naming. SailPoint itself runs [**Harbor Pilot**](https://aws.amazon.com/blogs/apn/sailpoint-harbor-pilot-simplified-identity-security-with-agentic-ai-on-aws/), an agentic AI for identity-security workflows running on AWS Bedrock. Their stack governs agents like the one they ship — a useful sanity check for any team picking a partner to govern theirs.
+Side note worth flagging. SailPoint themselves run [**Harbor Pilot**](https://aws.amazon.com/blogs/apn/sailpoint-harbor-pilot-simplified-identity-security-with-agentic-ai-on-aws/), an agentic AI for identity-security workflows on AWS Bedrock. So their own stack has to govern an agent like the one they ship. Useful sanity check when you're picking a partner to govern yours.
 
 Service accounts pretending to be agents may have been acceptable in 2024 prototypes. In 2026 production systems, the question is whether your agents have identities the org chart can recognize — and the certification cadence to prove it. The Gartner data is clear about why: 60% of organizations expect to deploy AI agents within two years, and more than 40% of those initiatives are at risk of being abandoned by 2027 if governance fundamentals aren't in place. SailPoint's own research adds the runtime evidence: 80% of organizations have already seen agents take unintended actions, and 96% see agents as a growing security threat.
 
