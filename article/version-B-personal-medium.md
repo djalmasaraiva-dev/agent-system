@@ -1,8 +1,15 @@
-# When Agents Call Agents: An Identity Governance Field Report from Production
+# Service Accounts Pretending to Be Agents: An Identity Governance Field Report
 
 *What we learned scaling 12 ADK agents to 47 across four platforms — and why the real bottleneck wasn't the agents. It was their identities.*
 
 **By Djalma Junior** (Head of Google Cloud Architecture, GFT Technologies).
+
+> **TL;DR**
+> - Twelve AI agents become forty-seven faster than your governance does.
+> - The current Google Cloud agent stack now solves the **runtime** identity problem cleanly: SPIFFE-anchored Agent Identity for Vertex AI Agent Engine, IAM + A2A authorization, Model Armor, Cloud Logging, plus Wiz for cross-platform posture.
+> - The **lifecycle** layer — who owns the agent, when it expires, who certifies it, who inherits ownership at offboarding — is still partner IGA territory. Getting it wrong is what kills initiatives.
+> - For Financial Services shops already standardized on SailPoint, the architectural shape I advocate is **SailPoint Agent Identity Security** on the Atlas platform, integrated with Identity Security Cloud and Data Access Security.
+> - Companion open-source code (Apache 2.0): **[github.com/djalmasaraiva-dev/agent-system](https://github.com/djalmasaraiva-dev/agent-system)** — 4 ADK agents, cost-guarded BigQuery tool, `/.well-known/agent-identity` bridge with IAP JWT verification, 62 unit tests.
 
 > *This article synthesizes patterns I have observed across multiple Financial Services engagements with ADK and Gemini-based agentic systems on Google Cloud. Project IDs, table names, and agent owner identifiers in the snippets and figures are placeholders. Numerical claims — agent counts, audit-response times, dataset sizes — are representative of those engagements rather than a single customer.*
 
@@ -93,6 +100,8 @@ But identity *lifecycle* — who owns the agent, when does it expire, has it bee
 ## The architecture, in code
 
 The system that grew on us looks unremarkable in code. Four agents on Google, three more on other platforms, the orchestrator gluing them together. The snippets below illustrate the reference pattern. They are simplified for readability, but preserve the control points we use in production: agent identity, tool allow-listing, rate limiting, audit logging, and cost telemetry.
+
+> **Companion repo:** the full reference implementation is open-source at **[github.com/djalmasaraiva-dev/agent-system](https://github.com/djalmasaraiva-dev/agent-system)** (Apache 2.0). Everything in this article — the four ADK agents, the cost-guarded BigQuery tool, the `/.well-known/agent-identity` bridge with IAP JWT verification, the SPIFFE-anchored agent identity registry, the governance callbacks, the 62 unit tests — runs end-to-end against a real Google Cloud project. `git clone && make install && ./dev.sh test` reproduces the build in under a minute.
 
 ```python
 # app/agent.py — the coordinator
@@ -373,6 +382,33 @@ Service accounts pretending to be agents may have been acceptable in 2024 protot
 Identity governance is not the most exciting part of agentic AI. It is the load-bearing part. Worth catching before the auditor does.
 
 
+
+---
+
+## Companion code
+
+Every snippet, screenshot, JSON sample, and architectural pattern in this article is implemented end-to-end in an open-source reference repository:
+
+**[github.com/djalmasaraiva-dev/agent-system](https://github.com/djalmasaraiva-dev/agent-system)** — Apache 2.0
+
+What is in it:
+
+- 4 ADK agents wired via `AgentTool` (coordinator + research + data + reporter) on Gemini 3.1
+- Cost-guarded BigQuery tool with dry-run + `maximum_bytes_billed` enforcement
+- `/.well-known/agent-identity` bridge with full Pydantic envelope and IAP JWT (ES256) verification
+- Governance callbacks: audit log, allow-list, loop guards, RPM rate limit
+- 62 unit tests, `ruff` + `mypy --strict` clean, 76% line coverage
+- Cloud Run and Vertex AI Agent Engine deployment scripts
+- The article itself + figures live under [`/article`](https://github.com/djalmasaraiva-dev/agent-system/tree/main/article) in the same repo
+
+Reproduce locally:
+
+```bash
+git clone https://github.com/djalmasaraiva-dev/agent-system.git
+cd agent-system && make install && ./dev.sh test       # 62 passing
+cp .env.example .env                                    # set your GCP project
+./dev.sh web                                            # ADK playground
+```
 
 ---
 
