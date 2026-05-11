@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="'IBM Plex Sans', -apple-system, system-ui, sans-serif">
+  <defs>
+    <style>
+      .serif { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; }
+      .sans { font-family: 'IBM Plex Sans', -apple-system, system-ui, sans-serif; }
+    </style>
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="1" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.10"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="600" fill="#FAF6EE"/>
+
+  <!-- Title -->
+  <text x="450" y="44" class="serif" font-size="22" font-weight="600" fill="#1A1A1A" text-anchor="middle">Cross-platform agent call graph</text>
+  <text x="450" y="66" class="sans" font-size="13" font-style="italic" fill="#7A6E5C" text-anchor="middle">Where governance becomes forensics</text>
+  <line x1="410" y1="82" x2="490" y2="82" stroke="#C9A227" stroke-width="1"/>
+
+  <!-- User -->
+  <circle cx="450" cy="120" r="22" fill="#1A1A1A" filter="url(#softShadow)"/>
+  <text x="450" y="125" class="sans" font-size="11" fill="#FAF6EE" text-anchor="middle" font-weight="500">User</text>
+
+  <!-- Connector to coordinator -->
+  <line x1="450" y1="142" x2="450" y2="170" stroke="#1A1A1A" stroke-width="1.5"/>
+
+  <!-- Coordinator -->
+  <rect x="360" y="170" width="180" height="62" rx="4" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.5" filter="url(#softShadow)"/>
+  <text x="450" y="196" class="sans" font-size="14" font-weight="600" fill="#1A1A1A" text-anchor="middle">coordinator</text>
+  <text x="450" y="217" class="sans" font-size="9" fill="#4A7C7E" text-anchor="middle" letter-spacing="0.6">GEMINI ENTERPRISE AGENT PLATFORM</text>
+
+  <!-- Lines from coordinator fanning out -->
+  <path d="M 450 232 C 450 260 130 260 130 318" stroke="#7A6E5C" stroke-width="1" fill="none"/>
+  <path d="M 450 232 C 450 260 270 260 270 318" stroke="#7A6E5C" stroke-width="1" fill="none"/>
+  <path d="M 450 232 C 450 260 450 260 450 318" stroke="#7A6E5C" stroke-width="1" fill="none"/>
+  <path d="M 450 232 C 450 260 620 260 620 318" stroke="#7A6E5C" stroke-width="1" fill="none"/>
+  <path d="M 450 232 C 450 260 780 260 780 318" stroke="#7A6E5C" stroke-width="1" fill="none"/>
+
+  <!-- Platform labels (above bands) -->
+  <text x="200" y="278" class="sans" font-size="10" fill="#4A7C7E" text-anchor="middle" font-weight="700" letter-spacing="1">GEMINI ENTERPRISE</text>
+  <text x="450" y="278" class="sans" font-size="10" fill="#4A6B8A" text-anchor="middle" font-weight="700" letter-spacing="1">AGENTFORCE</text>
+  <text x="620" y="278" class="sans" font-size="10" fill="#6B5A7E" text-anchor="middle" font-weight="700" letter-spacing="1">COPILOT STUDIO</text>
+  <text x="780" y="278" class="sans" font-size="10" fill="#B8893E" text-anchor="middle" font-weight="700" letter-spacing="1">BEDROCK AGENTCORE</text>
+
+  <!-- Platform background bands -->
+  <rect x="60" y="290" width="280" height="135" rx="6" fill="#4A7C7E" opacity="0.07"/>
+  <rect x="375" y="290" width="155" height="135" rx="6" fill="#4A6B8A" opacity="0.08"/>
+  <rect x="555" y="290" width="135" height="135" rx="6" fill="#6B5A7E" opacity="0.08"/>
+  <rect x="710" y="290" width="140" height="135" rx="6" fill="#B8893E" opacity="0.08"/>
+
+  <!-- Child agent boxes -->
+  <rect x="80" y="318" width="105" height="44" rx="4" fill="#FFFFFF" stroke="#4A7C7E" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="132" y="345" class="sans" font-size="11" fill="#1A1A1A" text-anchor="middle">research_agent</text>
+
+  <rect x="220" y="318" width="105" height="44" rx="4" fill="#FFFFFF" stroke="#4A7C7E" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="272" y="345" class="sans" font-size="11" fill="#1A1A1A" text-anchor="middle">data_agent</text>
+
+  <rect x="385" y="318" width="135" height="44" rx="4" fill="#FFFFFF" stroke="#4A6B8A" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="452" y="345" class="sans" font-size="11" fill="#1A1A1A" text-anchor="middle">customer_history</text>
+
+  <rect x="562" y="318" width="120" height="44" rx="4" fill="#FFFFFF" stroke="#6B5A7E" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="622" y="345" class="sans" font-size="11" fill="#1A1A1A" text-anchor="middle">compliance_agent</text>
+
+  <rect x="722" y="318" width="120" height="44" rx="4" fill="#FFFFFF" stroke="#B8893E" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="782" y="338" class="sans" font-size="11" fill="#1A1A1A" text-anchor="middle">notification_</text>
+  <text x="782" y="353" class="sans" font-size="11" fill="#1A1A1A" text-anchor="middle">agent</text>
+
+  <!-- Connectors to data sinks -->
+  <line x1="132" y1="362" x2="132" y2="385" stroke="#7A6E5C" stroke-width="1"/>
+  <line x1="272" y1="362" x2="272" y2="385" stroke="#7A6E5C" stroke-width="1"/>
+  <line x1="452" y1="362" x2="452" y2="385" stroke="#7A6E5C" stroke-width="1"/>
+  <line x1="622" y1="362" x2="622" y2="385" stroke="#7A6E5C" stroke-width="1"/>
+  <line x1="782" y1="362" x2="782" y2="385" stroke="#7A6E5C" stroke-width="1"/>
+
+  <!-- Data sinks -->
+  <text x="132" y="403" class="sans" font-size="10" fill="#5A5A5A" text-anchor="middle" font-style="italic">Web search</text>
+  <text x="272" y="403" class="sans" font-size="10" fill="#5A5A5A" text-anchor="middle" font-style="italic">BigQuery</text>
+  <text x="452" y="403" class="sans" font-size="10" fill="#5A5A5A" text-anchor="middle" font-style="italic">Salesforce CRM</text>
+  <text x="622" y="403" class="sans" font-size="10" fill="#5A5A5A" text-anchor="middle" font-style="italic">Policy engine</text>
+  <text x="782" y="403" class="sans" font-size="10" fill="#5A5A5A" text-anchor="middle" font-style="italic">Slack &amp; Email</text>
+
+  <!-- Bottom rule -->
+  <line x1="180" y1="465" x2="720" y2="465" stroke="#C9A227" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- Bottom annotations -->
+  <text x="450" y="494" class="serif" font-size="16" font-weight="500" fill="#1A1A1A" text-anchor="middle">Each platform sees its own slice.</text>
+  <text x="450" y="516" class="serif" font-size="16" font-weight="500" fill="#1A1A1A" text-anchor="middle">No single platform sees the chain.</text>
+
+  <text x="450" y="554" class="sans" font-size="11" font-style="italic" fill="#7A6E5C" text-anchor="middle">"Who can ultimately cause a write to Slack?"</text>
+  <text x="450" y="572" class="sans" font-size="11" font-style="italic" fill="#7A6E5C" text-anchor="middle">— Answerable in any single dashboard? No.</text>
+
+  <!-- Corner mark -->
+  <text x="852" y="582" class="sans" font-size="9" fill="#A89878" text-anchor="end" letter-spacing="0.5">FIG. 2</text>
+</svg>

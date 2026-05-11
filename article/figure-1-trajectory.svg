@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" font-family="'IBM Plex Sans', -apple-system, system-ui, sans-serif">
+  <defs>
+    <style>
+      .serif { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; }
+      .sans { font-family: 'IBM Plex Sans', -apple-system, system-ui, sans-serif; }
+    </style>
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="1" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.12"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="460" fill="#FAF6EE"/>
+
+  <!-- Title -->
+  <text x="450" y="44" class="serif" font-size="22" font-weight="600" fill="#1A1A1A" text-anchor="middle">From one agent to forty-seven</text>
+  <text x="450" y="66" class="sans" font-size="13" font-style="italic" fill="#7A6E5C" text-anchor="middle">A fifteen-month journey across four agent platforms</text>
+  <line x1="410" y1="82" x2="490" y2="82" stroke="#C9A227" stroke-width="1"/>
+
+  <!-- Horizontal axis line -->
+  <line x1="80" y1="290" x2="820" y2="290" stroke="#A89878" stroke-width="1"/>
+
+  <!-- Timeline markers (small vertical ticks) -->
+  <line x1="140" y1="285" x2="140" y2="295" stroke="#7A6E5C" stroke-width="1"/>
+  <line x1="320" y1="285" x2="320" y2="295" stroke="#7A6E5C" stroke-width="1"/>
+  <line x1="500" y1="285" x2="500" y2="295" stroke="#7A6E5C" stroke-width="1"/>
+  <line x1="680" y1="285" x2="680" y2="295" stroke="#7A6E5C" stroke-width="1"/>
+
+  <!-- Time labels below axis -->
+  <text x="140" y="316" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle" letter-spacing="0.6">MONTH 0</text>
+  <text x="320" y="316" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle" letter-spacing="0.6">MONTH 6</text>
+  <text x="500" y="316" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle" letter-spacing="0.6">MONTH 9</text>
+  <text x="680" y="316" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle" letter-spacing="0.6">MONTH 15</text>
+
+  <!-- ===== Milestone 1: Month 0 ===== -->
+  <!-- Single agent dot -->
+  <circle cx="140" cy="240" r="6" fill="#4A7C7E" filter="url(#softShadow)"/>
+
+  <!-- Label box -->
+  <rect x="80" y="118" width="120" height="92" rx="3" fill="#FFFFFF" stroke="#A89878" stroke-width="0.8" filter="url(#softShadow)"/>
+  <text x="140" y="138" class="sans" font-size="9" fill="#C9A227" text-anchor="middle" font-weight="700" letter-spacing="0.8">FIRST AGENT</text>
+  <line x1="115" y1="146" x2="165" y2="146" stroke="#C9A227" stroke-width="0.6"/>
+  <text x="140" y="170" class="serif" font-size="26" font-weight="600" fill="#1A1A1A" text-anchor="middle">1</text>
+  <text x="140" y="187" class="sans" font-size="10" fill="#5A5A5A" text-anchor="middle">agent</text>
+  <text x="140" y="201" class="sans" font-size="9" fill="#4A7C7E" text-anchor="middle" font-style="italic">Google only</text>
+
+  <!-- Connector from box to dot -->
+  <line x1="140" y1="210" x2="140" y2="234" stroke="#A89878" stroke-width="0.6" stroke-dasharray="2 2"/>
+
+  <!-- ===== Milestone 2: Month 6 — bug discovered, single platform still ===== -->
+  <!-- Cluster of dots (12 agents) -->
+  <g transform="translate(320, 240)">
+    <circle cx="0" cy="0" r="5" fill="#4A7C7E" filter="url(#softShadow)"/>
+    <circle cx="-12" cy="-2" r="4" fill="#4A7C7E" opacity="0.85"/>
+    <circle cx="11" cy="-3" r="4" fill="#4A7C7E" opacity="0.85"/>
+    <circle cx="-7" cy="9" r="3.5" fill="#4A7C7E" opacity="0.7"/>
+    <circle cx="8" cy="8" r="3.5" fill="#4A7C7E" opacity="0.7"/>
+    <circle cx="-18" cy="6" r="3" fill="#4A7C7E" opacity="0.6"/>
+    <circle cx="18" cy="5" r="3" fill="#4A7C7E" opacity="0.6"/>
+  </g>
+
+  <!-- Label box -->
+  <rect x="260" y="118" width="120" height="92" rx="3" fill="#FFFFFF" stroke="#A89878" stroke-width="0.8" filter="url(#softShadow)"/>
+  <text x="320" y="138" class="sans" font-size="9" fill="#C9A227" text-anchor="middle" font-weight="700" letter-spacing="0.8">47-DAY BUG</text>
+  <line x1="295" y1="146" x2="345" y2="146" stroke="#C9A227" stroke-width="0.6"/>
+  <text x="320" y="170" class="serif" font-size="26" font-weight="600" fill="#1A1A1A" text-anchor="middle">12</text>
+  <text x="320" y="187" class="sans" font-size="10" fill="#5A5A5A" text-anchor="middle">agents</text>
+  <text x="320" y="201" class="sans" font-size="9" fill="#4A7C7E" text-anchor="middle" font-style="italic">Google only</text>
+
+  <line x1="320" y1="210" x2="320" y2="234" stroke="#A89878" stroke-width="0.6" stroke-dasharray="2 2"/>
+
+  <!-- ===== Milestone 3: Month 9 — multi-platform, 47 agents ===== -->
+  <!-- Mixed cluster of dots representing all 4 platforms -->
+  <g transform="translate(500, 240)">
+    <!-- Google agents (largest group) -->
+    <circle cx="-22" cy="-5" r="3.5" fill="#4A7C7E"/>
+    <circle cx="-15" cy="-12" r="3.5" fill="#4A7C7E"/>
+    <circle cx="-8" cy="-5" r="3.5" fill="#4A7C7E"/>
+    <circle cx="-15" cy="3" r="3.5" fill="#4A7C7E"/>
+    <circle cx="-22" cy="6" r="3" fill="#4A7C7E" opacity="0.85"/>
+    <circle cx="-8" cy="-15" r="3" fill="#4A7C7E" opacity="0.85"/>
+    <circle cx="-2" cy="-12" r="3" fill="#4A7C7E" opacity="0.7"/>
+    <circle cx="-8" cy="6" r="3" fill="#4A7C7E" opacity="0.7"/>
+    <circle cx="-30" cy="-2" r="3" fill="#4A7C7E" opacity="0.7"/>
+    <circle cx="-30" cy="9" r="2.5" fill="#4A7C7E" opacity="0.6"/>
+    <!-- Agentforce -->
+    <circle cx="3" cy="-5" r="3.5" fill="#4A6B8A"/>
+    <circle cx="9" cy="2" r="3.5" fill="#4A6B8A"/>
+    <circle cx="2" cy="6" r="3" fill="#4A6B8A" opacity="0.85"/>
+    <circle cx="14" cy="-5" r="3" fill="#4A6B8A" opacity="0.7"/>
+    <!-- Copilot -->
+    <circle cx="20" cy="-2" r="3.5" fill="#6B5A7E"/>
+    <circle cx="22" cy="6" r="3" fill="#6B5A7E" opacity="0.85"/>
+    <circle cx="14" cy="-12" r="3" fill="#6B5A7E" opacity="0.7"/>
+    <!-- Bedrock -->
+    <circle cx="30" cy="-7" r="3.5" fill="#B8893E"/>
+    <circle cx="32" cy="2" r="3" fill="#B8893E" opacity="0.85"/>
+  </g>
+
+  <!-- Label box -->
+  <rect x="440" y="118" width="120" height="92" rx="3" fill="#FFFFFF" stroke="#A89878" stroke-width="0.8" filter="url(#softShadow)"/>
+  <text x="500" y="138" class="sans" font-size="9" fill="#C9A227" text-anchor="middle" font-weight="700" letter-spacing="0.8">CROSS-PLATFORM</text>
+  <line x1="475" y1="146" x2="525" y2="146" stroke="#C9A227" stroke-width="0.6"/>
+  <text x="500" y="170" class="serif" font-size="26" font-weight="600" fill="#1A1A1A" text-anchor="middle">47</text>
+  <text x="500" y="187" class="sans" font-size="10" fill="#5A5A5A" text-anchor="middle">agents</text>
+  <text x="500" y="201" class="sans" font-size="9" fill="#5A5A5A" text-anchor="middle" font-style="italic">4 platforms</text>
+
+  <line x1="500" y1="210" x2="500" y2="226" stroke="#A89878" stroke-width="0.6" stroke-dasharray="2 2"/>
+
+  <!-- ===== Milestone 4: Month 15 — governed ===== -->
+  <!-- Same cluster but with a halo of governance -->
+  <circle cx="680" cy="240" r="38" fill="none" stroke="#C9A227" stroke-width="1" stroke-dasharray="3 3" opacity="0.7"/>
+  <circle cx="680" cy="240" r="38" fill="#C9A227" opacity="0.05"/>
+
+  <g transform="translate(680, 240)">
+    <!-- Same cluster, slightly more organized -->
+    <circle cx="-18" cy="-4" r="3.5" fill="#4A7C7E"/>
+    <circle cx="-11" cy="-10" r="3.5" fill="#4A7C7E"/>
+    <circle cx="-4" cy="-4" r="3.5" fill="#4A7C7E"/>
+    <circle cx="-11" cy="4" r="3.5" fill="#4A7C7E"/>
+    <circle cx="-18" cy="6" r="3" fill="#4A7C7E" opacity="0.85"/>
+    <circle cx="-4" cy="-13" r="3" fill="#4A7C7E" opacity="0.85"/>
+    <circle cx="2" cy="-10" r="3" fill="#4A7C7E" opacity="0.7"/>
+    <circle cx="-4" cy="6" r="3" fill="#4A7C7E" opacity="0.7"/>
+    <circle cx="-25" cy="-2" r="3" fill="#4A7C7E" opacity="0.7"/>
+    <circle cx="-25" cy="8" r="2.5" fill="#4A7C7E" opacity="0.6"/>
+    <circle cx="6" cy="-4" r="3.5" fill="#4A6B8A"/>
+    <circle cx="12" cy="3" r="3.5" fill="#4A6B8A"/>
+    <circle cx="5" cy="6" r="3" fill="#4A6B8A" opacity="0.85"/>
+    <circle cx="17" cy="-4" r="3" fill="#4A6B8A" opacity="0.7"/>
+    <circle cx="22" cy="-1" r="3.5" fill="#6B5A7E"/>
+    <circle cx="24" cy="6" r="3" fill="#6B5A7E" opacity="0.85"/>
+    <circle cx="17" cy="-11" r="3" fill="#6B5A7E" opacity="0.7"/>
+    <circle cx="29" cy="-6" r="3.5" fill="#B8893E"/>
+    <circle cx="29" cy="3" r="3" fill="#B8893E" opacity="0.85"/>
+  </g>
+
+  <!-- Label box -->
+  <rect x="620" y="118" width="120" height="92" rx="3" fill="#FFF8E7" stroke="#C9A227" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="680" y="138" class="sans" font-size="9" fill="#C9A227" text-anchor="middle" font-weight="700" letter-spacing="0.8">GOVERNED</text>
+  <line x1="655" y1="146" x2="705" y2="146" stroke="#C9A227" stroke-width="0.6"/>
+  <text x="680" y="170" class="serif" font-size="26" font-weight="600" fill="#1A1A1A" text-anchor="middle">47</text>
+  <text x="680" y="187" class="sans" font-size="10" fill="#5A5A5A" text-anchor="middle">agents</text>
+  <text x="680" y="201" class="sans" font-size="9" fill="#C9A227" text-anchor="middle" font-style="italic" font-weight="600">+ IGA layer</text>
+
+  <line x1="680" y1="210" x2="680" y2="220" stroke="#A89878" stroke-width="0.6" stroke-dasharray="2 2"/>
+
+  <!-- Platform legend at bottom -->
+  <g transform="translate(150, 372)">
+    <circle cx="0" cy="0" r="5" fill="#4A7C7E"/>
+    <text x="12" y="4" class="sans" font-size="11" fill="#1A1A1A">Gemini Enterprise</text>
+
+    <circle cx="155" cy="0" r="5" fill="#4A6B8A"/>
+    <text x="167" y="4" class="sans" font-size="11" fill="#1A1A1A">Agentforce</text>
+
+    <circle cx="280" cy="0" r="5" fill="#6B5A7E"/>
+    <text x="292" y="4" class="sans" font-size="11" fill="#1A1A1A">Copilot Studio</text>
+
+    <circle cx="425" cy="0" r="5" fill="#B8893E"/>
+    <text x="437" y="4" class="sans" font-size="11" fill="#1A1A1A">Bedrock AgentCore</text>
+  </g>
+
+  <!-- Tagline below legend -->
+  <text x="450" y="418" class="serif" font-size="13" font-style="italic" fill="#7A6E5C" text-anchor="middle">Each platform decision was right alone. The aggregate became the problem.</text>
+
+  <!-- Corner mark -->
+  <text x="852" y="442" class="sans" font-size="9" fill="#A89878" text-anchor="end" letter-spacing="0.5">FIG. 1</text>
+</svg>

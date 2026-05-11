@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" font-family="'IBM Plex Sans', -apple-system, system-ui, sans-serif">
+  <defs>
+    <style>
+      .serif { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; }
+      .sans { font-family: 'IBM Plex Sans', -apple-system, system-ui, sans-serif; }
+    </style>
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="1" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.10"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="620" fill="#FAF6EE"/>
+
+  <!-- Title -->
+  <text x="450" y="44" class="serif" font-size="22" font-weight="600" fill="#1A1A1A" text-anchor="middle">Decision matrix · do you need an IGA layer?</text>
+  <text x="450" y="66" class="sans" font-size="13" font-style="italic" fill="#7A6E5C" text-anchor="middle">Most enterprises hit at least three of the right-hand criteria</text>
+  <line x1="410" y1="82" x2="490" y2="82" stroke="#C9A227" stroke-width="1"/>
+
+  <!-- Left column -->
+  <rect x="80" y="110" width="370" height="460" rx="6" fill="#FFFFFF" stroke="#A89878" stroke-width="1" filter="url(#softShadow)"/>
+
+  <text x="265" y="142" class="sans" font-size="9" fill="#A89878" text-anchor="middle" font-weight="700" letter-spacing="0.8">CASE A</text>
+  <text x="265" y="172" class="serif" font-size="17" font-weight="600" fill="#1A1A1A" text-anchor="middle">Google Cloud + posture tools</text>
+  <line x1="195" y1="186" x2="335" y2="186" stroke="#A89878" stroke-width="0.6"/>
+
+  <!-- Left column items -->
+  <text x="108" y="222" class="sans" font-size="13" fill="#5A5A5A">✓</text>
+  <text x="128" y="222" class="sans" font-size="12" fill="#1A1A1A">Agents governed inside Google Cloud</text>
+  <text x="128" y="240" class="sans" font-size="12" fill="#1A1A1A">or limited cross-platform exposure</text>
+
+  <text x="108" y="276" class="sans" font-size="13" fill="#5A5A5A">✓</text>
+  <text x="128" y="276" class="sans" font-size="12" fill="#1A1A1A">Audit obligations satisfied by</text>
+  <text x="128" y="294" class="sans" font-size="12" fill="#1A1A1A">raw audit logs and security findings</text>
+
+  <text x="108" y="330" class="sans" font-size="13" fill="#5A5A5A">✓</text>
+  <text x="128" y="330" class="sans" font-size="12" fill="#1A1A1A">Engineering team owns lifecycle</text>
+  <text x="128" y="348" class="sans" font-size="12" fill="#1A1A1A">manually; turnover is low</text>
+
+  <text x="108" y="384" class="sans" font-size="13" fill="#5A5A5A">✓</text>
+  <text x="128" y="384" class="sans" font-size="12" fill="#1A1A1A">Not in a regulated industry with</text>
+  <text x="128" y="402" class="sans" font-size="12" fill="#1A1A1A">periodic certification cycles</text>
+
+  <text x="108" y="438" class="sans" font-size="13" fill="#5A5A5A">✓</text>
+  <text x="128" y="438" class="sans" font-size="12" fill="#1A1A1A">No existing IGA platform that</text>
+  <text x="128" y="456" class="sans" font-size="12" fill="#1A1A1A">already governs human identities</text>
+
+  <text x="265" y="528" class="sans" font-size="11" font-style="italic" fill="#7A6E5C" text-anchor="middle">Narrow scope. Single platform.</text>
+  <text x="265" y="546" class="sans" font-size="11" font-style="italic" fill="#7A6E5C" text-anchor="middle">Stable team. Light audit.</text>
+
+  <!-- Right column - emphasized -->
+  <rect x="470" y="110" width="370" height="460" rx="6" fill="#FFF8E7" stroke="#C9A227" stroke-width="1.8" filter="url(#softShadow)"/>
+
+  <text x="655" y="142" class="sans" font-size="9" fill="#C9A227" text-anchor="middle" font-weight="700" letter-spacing="0.8">CASE B</text>
+  <text x="655" y="172" class="serif" font-size="17" font-weight="600" fill="#1A1A1A" text-anchor="middle">Add a partner IGA layer when…</text>
+  <line x1="565" y1="186" x2="745" y2="186" stroke="#C9A227" stroke-width="0.8"/>
+
+  <!-- Right column items -->
+  <text x="498" y="218" class="sans" font-size="13" fill="#C9A227" font-weight="600">✓</text>
+  <text x="518" y="218" class="sans" font-size="12" fill="#1A1A1A">Multi-platform deployment requires</text>
+  <text x="518" y="236" class="sans" font-size="12" fill="#1A1A1A">identity lifecycle governance</text>
+
+  <text x="498" y="266" class="sans" font-size="13" fill="#C9A227" font-weight="600">✓</text>
+  <text x="518" y="266" class="sans" font-size="12" fill="#1A1A1A">Regulated: BACEN, LGPD, SOX,</text>
+  <text x="518" y="284" class="sans" font-size="12" fill="#1A1A1A">GDPR, HIPAA, PCI-DSS</text>
+
+  <text x="498" y="314" class="sans" font-size="13" fill="#C9A227" font-weight="600">✓</text>
+  <text x="518" y="314" class="sans" font-size="12" fill="#1A1A1A">External audit examines agent</text>
+  <text x="518" y="332" class="sans" font-size="12" fill="#1A1A1A">decisions or data access</text>
+
+  <text x="498" y="362" class="sans" font-size="13" fill="#C9A227" font-weight="600">✓</text>
+  <text x="518" y="362" class="sans" font-size="12" fill="#1A1A1A">Headcount turnover is normal</text>
+  <text x="518" y="380" class="sans" font-size="12" fill="#1A1A1A">(it always is)</text>
+
+  <text x="498" y="410" class="sans" font-size="13" fill="#C9A227" font-weight="600">✓</text>
+  <text x="518" y="410" class="sans" font-size="12" fill="#1A1A1A">10+ agents in production, or</text>
+  <text x="518" y="428" class="sans" font-size="12" fill="#1A1A1A">visible runway to 50+</text>
+
+  <text x="498" y="458" class="sans" font-size="13" fill="#C9A227" font-weight="600">✓</text>
+  <text x="518" y="458" class="sans" font-size="12" fill="#1A1A1A">Existing IGA already governs</text>
+  <text x="518" y="476" class="sans" font-size="12" fill="#1A1A1A">human identities</text>
+
+  <text x="655" y="540" class="sans" font-size="11" font-style="italic" fill="#7A6E5C" text-anchor="middle">Most enterprises in 2026.</text>
+
+  <!-- Corner mark -->
+  <text x="852" y="600" class="sans" font-size="9" fill="#A89878" text-anchor="end" letter-spacing="0.5">FIG. 5</text>
+</svg>

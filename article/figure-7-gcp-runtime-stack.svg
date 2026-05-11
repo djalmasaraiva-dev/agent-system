@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="'Google Sans', 'Roboto', -apple-system, system-ui, sans-serif">
+  <defs>
+    <marker id="arrowGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5F6368"/>
+    </marker>
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.10"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="900" height="600" fill="#F8F9FA"/>
+
+  <text x="450" y="50" font-size="22" font-weight="500" fill="#202124" text-anchor="middle">Google Cloud runtime governance stack</text>
+  <text x="450" y="74" font-size="13" font-style="italic" fill="#5F6368" text-anchor="middle">Identity, authorization, runtime protection, and evidence — before lifecycle governance begins</text>
+  <line x1="410" y1="90" x2="490" y2="90" stroke="#4285F4" stroke-width="2"/>
+
+  <!-- IDENTITY (Google Blue) -->
+  <rect x="72" y="124" width="160" height="340" rx="8" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.5" filter="url(#softShadow)"/>
+  <rect x="72" y="124" width="160" height="38" rx="8" fill="#4285F4"/>
+  <text x="152" y="149" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600" letter-spacing="1">IDENTITY</text>
+  <circle cx="152" cy="220" r="36" fill="#E8F0FE" stroke="#4285F4" stroke-width="1.5"/>
+  <circle cx="152" cy="212" r="9" fill="#4285F4"/>
+  <path d="M135 240 Q152 228 169 240 L169 246 Q152 252 135 246 Z" fill="#4285F4"/>
+  <text x="152" y="296" font-size="14" fill="#202124" text-anchor="middle" font-weight="500">Agent Engine</text>
+  <text x="152" y="314" font-size="14" fill="#202124" text-anchor="middle" font-weight="500">Identity</text>
+  <text x="152" y="350" font-size="11" fill="#5F6368" text-anchor="middle">Unique IAM principal</text>
+  <text x="152" y="368" font-size="11" fill="#5F6368" text-anchor="middle">per agent resource</text>
+  <text x="152" y="386" font-size="11" fill="#5F6368" text-anchor="middle">SPIFFE-anchored</text>
+  <text x="152" y="404" font-size="11" fill="#5F6368" text-anchor="middle">system-attested</text>
+
+  <!-- AUTHORIZATION (Google Green) -->
+  <rect x="270" y="124" width="160" height="340" rx="8" fill="#FFFFFF" stroke="#34A853" stroke-width="1.5" filter="url(#softShadow)"/>
+  <rect x="270" y="124" width="160" height="38" rx="8" fill="#34A853"/>
+  <text x="350" y="149" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600" letter-spacing="1">AUTHORIZATION</text>
+  <rect x="306" y="190" width="88" height="60" rx="6" fill="#E6F4EA" stroke="#34A853" stroke-width="1.5"/>
+  <text x="350" y="220" font-size="18" fill="#202124" text-anchor="middle" font-weight="500">IAM</text>
+  <text x="350" y="240" font-size="10" fill="#34A853" text-anchor="middle" font-weight="500">+ A2A</text>
+  <text x="350" y="296" font-size="14" fill="#202124" text-anchor="middle" font-weight="500">IAM + A2A</text>
+  <text x="350" y="314" font-size="14" fill="#202124" text-anchor="middle" font-weight="500">policy</text>
+  <text x="350" y="350" font-size="11" fill="#5F6368" text-anchor="middle">Least-privilege</text>
+  <text x="350" y="368" font-size="11" fill="#5F6368" text-anchor="middle">agent-to-agent and</text>
+  <text x="350" y="386" font-size="11" fill="#5F6368" text-anchor="middle">agent-to-tool</text>
+  <text x="350" y="404" font-size="11" fill="#5F6368" text-anchor="middle">access control</text>
+
+  <!-- RUNTIME PROTECTION (Google Yellow) -->
+  <rect x="468" y="124" width="160" height="340" rx="8" fill="#FFFFFF" stroke="#F9AB00" stroke-width="1.5" filter="url(#softShadow)"/>
+  <rect x="468" y="124" width="160" height="38" rx="8" fill="#F9AB00"/>
+  <text x="548" y="149" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600" letter-spacing="1">RUNTIME PROTECTION</text>
+  <path d="M548 184 L590 204 L582 248 C575 270 563 286 548 298 C533 286 521 270 514 248 L506 204 Z" fill="#FEF7E0" stroke="#F9AB00" stroke-width="1.5"/>
+  <text x="548" y="232" font-size="14" fill="#202124" text-anchor="middle" font-weight="500">Model</text>
+  <text x="548" y="250" font-size="14" fill="#202124" text-anchor="middle" font-weight="500">Armor</text>
+  <text x="548" y="324" font-size="14" fill="#202124" text-anchor="middle" font-weight="500">Model Armor</text>
+  <text x="548" y="350" font-size="11" fill="#5F6368" text-anchor="middle">Prompt injection,</text>
+  <text x="548" y="368" font-size="11" fill="#5F6368" text-anchor="middle">jailbreak, and</text>
+  <text x="548" y="386" font-size="11" fill="#5F6368" text-anchor="middle">sensitive-data</text>
+  <text x="548" y="404" font-size="11" fill="#5F6368" text-anchor="middle">controls</text>
+
+  <!-- EVIDENCE (Google Red) -->
+  <rect x="666" y="124" width="160" height="340" rx="8" fill="#FFFFFF" stroke="#EA4335" stroke-width="1.5" filter="url(#softShadow)"/>
+  <rect x="666" y="124" width="160" height="38" rx="8" fill="#EA4335"/>
+  <text x="746" y="149" font-size="11" fill="#FFFFFF" text-anchor="middle" font-weight="600" letter-spacing="1">EVIDENCE</text>
+  <rect x="704" y="186" width="84" height="112" rx="6" fill="#FCE8E6" stroke="#EA4335" stroke-width="1.5"/>
+  <line x1="720" y1="212" x2="772" y2="212" stroke="#EA4335" stroke-width="1.4"/>
+  <line x1="720" y1="234" x2="772" y2="234" stroke="#EA4335" stroke-width="1.4"/>
+  <line x1="720" y1="256" x2="760" y2="256" stroke="#EA4335" stroke-width="1.4"/>
+  <line x1="720" y1="278" x2="768" y2="278" stroke="#EA4335" stroke-width="1.4"/>
+  <text x="746" y="324" font-size="14" fill="#202124" text-anchor="middle" font-weight="500">Logging + SCC</text>
+  <text x="746" y="350" font-size="11" fill="#5F6368" text-anchor="middle">Cloud Logging,</text>
+  <text x="746" y="368" font-size="11" fill="#5F6368" text-anchor="middle">Security Command</text>
+  <text x="746" y="386" font-size="11" fill="#5F6368" text-anchor="middle">Center, and Wiz</text>
+  <text x="746" y="404" font-size="11" fill="#5F6368" text-anchor="middle">posture view</text>
+
+  <!-- arrows between columns -->
+  <line x1="238" y1="294" x2="264" y2="294" stroke="#5F6368" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <line x1="436" y1="294" x2="462" y2="294" stroke="#5F6368" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+  <line x1="634" y1="294" x2="660" y2="294" stroke="#5F6368" stroke-width="1.5" marker-end="url(#arrowGray)"/>
+
+  <!-- callout: what this layer does not cover -->
+  <rect x="138" y="500" width="624" height="60" rx="8" fill="#FFFFFF" stroke="#DADCE0" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="450" y="524" font-size="10" fill="#5F6368" text-anchor="middle" font-weight="600" letter-spacing="1">WHAT THIS DOES NOT ANSWER</text>
+  <text x="450" y="548" font-size="16" fill="#202124" text-anchor="middle" font-weight="500">Who owns the agent in the human organization?</text>
+</svg>

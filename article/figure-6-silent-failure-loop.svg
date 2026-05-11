@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" font-family="'IBM Plex Sans', -apple-system, system-ui, sans-serif">
+  <defs>
+    <style>
+      .serif { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; }
+      .sans { font-family: 'IBM Plex Sans', -apple-system, system-ui, sans-serif; }
+    </style>
+    <marker id="arrowGold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#C9A227"/>
+    </marker>
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="1" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.12"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="900" height="520" fill="#FAF6EE"/>
+
+  <text x="450" y="44" class="serif" font-size="22" font-weight="600" fill="#1A1A1A" text-anchor="middle">Anatomy of a silent agent failure</text>
+  <text x="450" y="66" class="sans" font-size="13" font-style="italic" fill="#7A6E5C" text-anchor="middle">The bug was small; the ownership gap was structural</text>
+  <line x1="410" y1="82" x2="490" y2="82" stroke="#C9A227" stroke-width="1"/>
+
+  <rect x="72" y="132" width="165" height="104" rx="5" fill="#FFFFFF" stroke="#4A7C7E" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="154" y="158" class="sans" font-size="9" fill="#4A7C7E" text-anchor="middle" font-weight="700" letter-spacing="0.8">DAY 0</text>
+  <text x="154" y="184" class="serif" font-size="20" fill="#1A1A1A" text-anchor="middle" font-weight="600">Agent ships</text>
+  <text x="154" y="207" class="sans" font-size="11" fill="#5A5A5A" text-anchor="middle">Research assistant enters</text>
+  <text x="154" y="224" class="sans" font-size="11" fill="#5A5A5A" text-anchor="middle">production workflow</text>
+
+  <rect x="287" y="132" width="165" height="104" rx="5" fill="#FFFFFF" stroke="#A89878" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="369" y="158" class="sans" font-size="9" fill="#A89878" text-anchor="middle" font-weight="700" letter-spacing="0.8">DAYS 1-46</text>
+  <text x="369" y="184" class="serif" font-size="20" fill="#1A1A1A" text-anchor="middle" font-weight="600">Bad citations</text>
+  <text x="369" y="207" class="sans" font-size="11" fill="#5A5A5A" text-anchor="middle">Outputs look plausible</text>
+  <text x="369" y="224" class="sans" font-size="11" fill="#5A5A5A" text-anchor="middle">and pass unnoticed</text>
+
+  <rect x="502" y="132" width="165" height="104" rx="5" fill="#FFFFFF" stroke="#B8893E" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="584" y="158" class="sans" font-size="9" fill="#B8893E" text-anchor="middle" font-weight="700" letter-spacing="0.8">DAY 47</text>
+  <text x="584" y="184" class="serif" font-size="20" fill="#1A1A1A" text-anchor="middle" font-weight="600">Analyst catches it</text>
+  <text x="584" y="207" class="sans" font-size="11" fill="#5A5A5A" text-anchor="middle">A regulator-facing</text>
+  <text x="584" y="224" class="sans" font-size="11" fill="#5A5A5A" text-anchor="middle">reference fails lookup</text>
+
+  <rect x="697" y="132" width="132" height="104" rx="5" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="763" y="158" class="sans" font-size="9" fill="#1A1A1A" text-anchor="middle" font-weight="700" letter-spacing="0.8">AFTER</text>
+  <text x="763" y="184" class="serif" font-size="20" fill="#1A1A1A" text-anchor="middle" font-weight="600">Fix lands</text>
+  <text x="763" y="207" class="sans" font-size="11" fill="#5A5A5A" text-anchor="middle">Code change takes</text>
+  <text x="763" y="224" class="sans" font-size="11" fill="#5A5A5A" text-anchor="middle">about an hour</text>
+
+  <line x1="242" y1="184" x2="282" y2="184" stroke="#C9A227" stroke-width="1.5" marker-end="url(#arrowGold)"/>
+  <line x1="457" y1="184" x2="497" y2="184" stroke="#C9A227" stroke-width="1.5" marker-end="url(#arrowGold)"/>
+  <line x1="672" y1="184" x2="692" y2="184" stroke="#C9A227" stroke-width="1.5" marker-end="url(#arrowGold)"/>
+
+  <rect x="112" y="310" width="676" height="128" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="450" y="342" class="sans" font-size="10" fill="#A89878" text-anchor="middle" font-weight="700" letter-spacing="0.9">THE REAL INCIDENT</text>
+  <text x="450" y="374" class="serif" font-size="24" fill="#1A1A1A" text-anchor="middle" font-weight="600">Nobody could answer the ownership question quickly</text>
+  <text x="450" y="404" class="sans" font-size="12" fill="#5A5A5A" text-anchor="middle">Owner moved teams · shared service account · infrastructure monitoring only · no review cadence</text>
+  <line x1="275" y1="418" x2="625" y2="418" stroke="#C9A227" stroke-width="0.8" opacity="0.6"/>
+  <text x="450" y="450" class="sans" font-size="10" fill="#A89878" text-anchor="middle" letter-spacing="0.5">FIG. 3</text>
+</svg>

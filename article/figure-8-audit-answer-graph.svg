@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="'IBM Plex Sans', -apple-system, system-ui, sans-serif">
+  <defs>
+    <style>
+      .serif { font-family: 'Fraunces', Georgia, 'Times New Roman', serif; }
+      .sans { font-family: 'IBM Plex Sans', -apple-system, system-ui, sans-serif; }
+    </style>
+    <marker id="arrowGold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#C9A227"/>
+    </marker>
+    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="0" dy="1" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.12"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="900" height="560" fill="#FAF6EE"/>
+
+  <text x="450" y="44" class="serif" font-size="22" font-weight="600" fill="#1A1A1A" text-anchor="middle">Answering the auditor as a graph query</text>
+  <text x="450" y="66" class="sans" font-size="13" font-style="italic" fill="#7A6E5C" text-anchor="middle">From forensic log joins to governed identity relationships</text>
+  <line x1="410" y1="82" x2="490" y2="82" stroke="#C9A227" stroke-width="1"/>
+
+  <rect x="80" y="116" width="740" height="66" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1.1" filter="url(#softShadow)"/>
+  <text x="450" y="145" class="sans" font-size="10" fill="#A89878" text-anchor="middle" font-weight="700" letter-spacing="0.8">AUDITOR QUESTION</text>
+  <text x="450" y="169" class="serif" font-size="19" fill="#1A1A1A" text-anchor="middle" font-weight="600">Who can ultimately cause a write to that customer table?</text>
+
+  <circle cx="142" cy="300" r="34" fill="#FFFFFF" stroke="#4A7C7E" stroke-width="1.4" filter="url(#softShadow)"/>
+  <text x="142" y="295" class="sans" font-size="11" fill="#4A7C7E" text-anchor="middle" font-weight="700">HUMAN</text>
+  <text x="142" y="314" class="sans" font-size="10" fill="#5A5A5A" text-anchor="middle">analyst</text>
+
+  <rect x="250" y="262" width="142" height="76" rx="6" fill="#FFFFFF" stroke="#4A7C7E" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="321" y="288" class="sans" font-size="10" fill="#4A7C7E" text-anchor="middle" font-weight="700">GOOGLE CLOUD</text>
+  <text x="321" y="311" class="serif" font-size="17" fill="#1A1A1A" text-anchor="middle" font-weight="600">coordinator</text>
+  <text x="321" y="329" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle">Agent Engine ID</text>
+
+  <rect x="470" y="216" width="150" height="76" rx="6" fill="#FFFFFF" stroke="#4A6B8A" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="545" y="242" class="sans" font-size="10" fill="#4A6B8A" text-anchor="middle" font-weight="700">SALESFORCE</text>
+  <text x="545" y="265" class="serif" font-size="17" fill="#1A1A1A" text-anchor="middle" font-weight="600">customer</text>
+  <text x="545" y="283" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle">history agent</text>
+
+  <rect x="470" y="352" width="150" height="76" rx="6" fill="#FFFFFF" stroke="#6B5A7E" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="545" y="378" class="sans" font-size="10" fill="#6B5A7E" text-anchor="middle" font-weight="700">MICROSOFT</text>
+  <text x="545" y="401" class="serif" font-size="17" fill="#1A1A1A" text-anchor="middle" font-weight="600">compliance</text>
+  <text x="545" y="419" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle">policy agent</text>
+
+  <rect x="700" y="262" width="120" height="76" rx="6" fill="#FFFFFF" stroke="#B8893E" stroke-width="1.2" filter="url(#softShadow)"/>
+  <text x="760" y="288" class="sans" font-size="10" fill="#B8893E" text-anchor="middle" font-weight="700">BIGQUERY</text>
+  <text x="760" y="311" class="serif" font-size="17" fill="#1A1A1A" text-anchor="middle" font-weight="600">customer</text>
+  <text x="760" y="329" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle">table write</text>
+
+  <line x1="178" y1="300" x2="244" y2="300" stroke="#C9A227" stroke-width="1.6" marker-end="url(#arrowGold)"/>
+  <line x1="398" y1="289" x2="464" y2="262" stroke="#C9A227" stroke-width="1.6" marker-end="url(#arrowGold)"/>
+  <line x1="398" y1="311" x2="464" y2="379" stroke="#C9A227" stroke-width="1.2" stroke-dasharray="4 4" marker-end="url(#arrowGold)"/>
+  <line x1="626" y1="254" x2="694" y2="287" stroke="#C9A227" stroke-width="1.6" marker-end="url(#arrowGold)"/>
+  <line x1="626" y1="390" x2="694" y2="316" stroke="#A89878" stroke-width="1.1" stroke-dasharray="4 4" marker-end="url(#arrowGold)"/>
+
+  <text x="210" y="284" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle">delegates</text>
+  <text x="432" y="257" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle">calls</text>
+  <text x="662" y="262" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle">can write</text>
+
+  <rect x="164" y="468" width="572" height="48" rx="6" fill="#FFFFFF" stroke="#1A1A1A" stroke-width="1" filter="url(#softShadow)"/>
+  <text x="450" y="489" class="sans" font-size="10" fill="#A89878" text-anchor="middle" font-weight="700" letter-spacing="0.8">GRAPH ANSWER</text>
+  <text x="450" y="510" class="serif" font-size="16" fill="#1A1A1A" text-anchor="middle" font-weight="600">human owner + delegated user + agent chain + target data scope</text>
+</svg>
