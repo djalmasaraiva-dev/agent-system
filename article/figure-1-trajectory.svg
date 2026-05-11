@@ -69,7 +69,7 @@
 
   <!-- Label box -->
   <rect x="260" y="118" width="120" height="92" rx="3" fill="#FFFFFF" stroke="#A89878" stroke-width="0.8" filter="url(#softShadow)"/>
-  <text x="320" y="138" class="sans" font-size="9" fill="#C9A227" text-anchor="middle" font-weight="700" letter-spacing="0.8">47-DAY BUG</text>
+  <text x="320" y="138" class="sans" font-size="9" fill="#C9A227" text-anchor="middle" font-weight="700" letter-spacing="0.8">60-DAY BUG</text>
   <line x1="295" y1="146" x2="345" y2="146" stroke="#C9A227" stroke-width="0.6"/>
   <text x="320" y="170" class="serif" font-size="26" font-weight="600" fill="#1A1A1A" text-anchor="middle">12</text>
   <text x="320" y="187" class="sans" font-size="10" fill="#5A5A5A" text-anchor="middle">agents</text>
