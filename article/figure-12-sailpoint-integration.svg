@@ -1,90 +1,198 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" font-family="'Google Sans', 'Roboto', -apple-system, system-ui, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 880" font-family="'Inter', 'Google Sans', 'Roboto', -apple-system, system-ui, sans-serif">
   <defs>
-    <marker id="arrowUp" viewBox="0 0 10 10" refX="5" refY="0" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M 0 10 L 5 0 L 10 10 z" fill="#5F6368"/>
-    </marker>
-    <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
-      <feOffset dx="0" dy="2" result="offsetblur"/>
-      <feComponentTransfer><feFuncA type="linear" slope="0.10"/></feComponentTransfer>
+    <!-- Layer header gradients -->
+    <linearGradient id="purpleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4527A0"/>
+      <stop offset="100%" stop-color="#673AB7"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1A73E8"/>
+      <stop offset="100%" stop-color="#4285F4"/>
+    </linearGradient>
+    <!-- Subtle background gradient for layer panels -->
+    <linearGradient id="purplePanel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FAF7FF"/>
+    </linearGradient>
+    <linearGradient id="bluePanel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F4F9FF"/>
+    </linearGradient>
+    <!-- Card shadow -->
+    <filter id="cardShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="3" result="offsetblur"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.08"/></feComponentTransfer>
       <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
+    <filter id="layerShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+      <feOffset dx="0" dy="4" result="offsetblur"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- Arrow marker -->
+    <marker id="arrow" viewBox="0 0 14 14" refX="7" refY="7" markerWidth="12" markerHeight="12" orient="auto">
+      <path d="M 2 2 L 11 7 L 2 12" fill="none" stroke="#9AA0A6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
   </defs>
 
-  <rect width="900" height="640" fill="#F8F9FA"/>
+  <!-- ============ Background ============ -->
+  <rect width="1200" height="880" fill="#FAFBFC"/>
 
-  <text x="450" y="48" font-size="22" font-weight="500" fill="#202124" text-anchor="middle">From runtime identity to lifecycle governance</text>
-  <text x="450" y="72" font-size="13" font-style="italic" fill="#5F6368" text-anchor="middle">How an identity governance layer sits above the Google Cloud agent runtime</text>
-  <line x1="410" y1="88" x2="490" y2="88" stroke="#4285F4" stroke-width="2"/>
+  <!-- ============ Title ============ -->
+  <text x="600" y="62" font-size="30" font-weight="600" fill="#202124" text-anchor="middle" letter-spacing="-0.3">From runtime identity to lifecycle governance</text>
+  <text x="600" y="92" font-size="15" font-style="italic" fill="#5F6368" text-anchor="middle">How an identity governance layer sits above the Google Cloud agent runtime</text>
+  <line x1="540" y1="112" x2="660" y2="112" stroke="#673AB7" stroke-width="3" stroke-linecap="round"/>
 
-  <!-- HR system on top -->
-  <rect x="340" y="120" width="220" height="56" rx="8" fill="#FFFFFF" stroke="#5F6368" stroke-width="1.4" stroke-dasharray="6 4" filter="url(#softShadow)"/>
-  <text x="450" y="143" font-size="10" fill="#5F6368" text-anchor="middle" font-weight="600" letter-spacing="1">SYSTEM OF RECORD</text>
-  <text x="450" y="163" font-size="14" fill="#202124" text-anchor="middle" font-weight="500">HR — employees, contractors, joiner-mover-leaver events</text>
+  <!-- ============ Top: HR system of record ============ -->
+  <g transform="translate(440, 150)">
+    <rect width="320" height="78" rx="14" fill="#FFFFFF" stroke="#DADCE0" stroke-width="1.4" stroke-dasharray="7 5" filter="url(#cardShadow)"/>
+    <!-- HR icon (simple person + ID badge) -->
+    <g transform="translate(28, 24)">
+      <circle cx="14" cy="11" r="7" fill="none" stroke="#5F6368" stroke-width="1.8"/>
+      <path d="M 2 30 Q 14 18 26 30" fill="none" stroke="#5F6368" stroke-width="1.8" stroke-linecap="round"/>
+    </g>
+    <text x="86" y="34" font-size="11" fill="#9AA0A6" font-weight="600" letter-spacing="1.5">SYSTEM OF RECORD</text>
+    <text x="86" y="58" font-size="16" fill="#202124" font-weight="500">HR — joiner • mover • leaver</text>
+  </g>
 
-  <!-- Arrow from HR to IGA -->
-  <line x1="450" y1="180" x2="450" y2="210" stroke="#5F6368" stroke-width="1.5" marker-end="url(#arrowUp)" transform="rotate(180 450 195)"/>
-  <text x="465" y="200" font-size="10" fill="#5F6368" font-style="italic">JML events</text>
+  <!-- Connecting line: HR → Layer 2 -->
+  <line x1="600" y1="236" x2="600" y2="278" stroke="#9AA0A6" stroke-width="1.8" stroke-linecap="round"/>
+  <polygon points="600,288 594,278 606,278" fill="#9AA0A6"/>
+  <text x="612" y="262" font-size="12" fill="#5F6368" font-style="italic">JML events</text>
 
-  <!-- Layer 2: IGA -->
-  <rect x="72" y="220" width="756" height="170" rx="10" fill="#FFFFFF" stroke="#673AB7" stroke-width="1.6" filter="url(#softShadow)"/>
-  <rect x="72" y="220" width="756" height="42" rx="10" fill="#673AB7"/>
-  <text x="450" y="248" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="600" letter-spacing="1.5">LAYER 2 — IDENTITY LIFECYCLE GOVERNANCE</text>
+  <!-- ============ Layer 2: Identity Lifecycle Governance ============ -->
+  <g transform="translate(60, 296)">
+    <rect width="1080" height="232" rx="18" fill="url(#purplePanel)" stroke="#E0D7F5" stroke-width="1.4" filter="url(#layerShadow)"/>
 
-  <text x="450" y="288" font-size="15" fill="#202124" text-anchor="middle" font-weight="500">SailPoint Agent Identity Security  ·  built on SailPoint Atlas  ·  integrated with Identity Security Cloud</text>
+    <!-- Layer header strip -->
+    <path d="M 0 18 Q 0 0 18 0 L 1062 0 Q 1080 0 1080 18 L 1080 56 L 0 56 Z" fill="url(#purpleGrad)"/>
+    <text x="30" y="35" font-size="11" fill="#E1BEE7" font-weight="700" letter-spacing="2">LAYER 2</text>
+    <text x="30" y="48" font-size="13" fill="#FFFFFF" font-weight="400" letter-spacing="0.5">Identity Lifecycle Governance</text>
 
-  <!-- IGA capability boxes -->
-  <rect x="100" y="306" width="170" height="70" rx="6" fill="#F3E5F5" stroke="#673AB7" stroke-width="1"/>
-  <text x="185" y="325" font-size="11" fill="#673AB7" text-anchor="middle" font-weight="600">OWNERSHIP &amp; SUCCESSION</text>
-  <text x="185" y="345" font-size="11" fill="#5F6368" text-anchor="middle">Human owner per agent</text>
-  <text x="185" y="361" font-size="11" fill="#5F6368" text-anchor="middle">Fallback on offboarding</text>
+    <!-- Product name centerpiece -->
+    <text x="540" y="90" font-size="18" fill="#202124" font-weight="600" text-anchor="middle">SailPoint Agent Identity Security</text>
+    <text x="540" y="111" font-size="13" fill="#673AB7" font-weight="500" text-anchor="middle">built on SailPoint Atlas  ·  integrated with Identity Security Cloud</text>
 
-  <rect x="280" y="306" width="170" height="70" rx="6" fill="#F3E5F5" stroke="#673AB7" stroke-width="1"/>
-  <text x="365" y="325" font-size="11" fill="#673AB7" text-anchor="middle" font-weight="600">CERTIFICATION</text>
-  <text x="365" y="345" font-size="11" fill="#5F6368" text-anchor="middle">Quarterly campaigns</text>
-  <text x="365" y="361" font-size="11" fill="#5F6368" text-anchor="middle">Attestation trail</text>
+    <!-- Capability card 1: Ownership -->
+    <g transform="translate(30, 132)">
+      <rect width="244" height="84" rx="10" fill="#FFFFFF" stroke="#E0D7F5" stroke-width="1.2" filter="url(#cardShadow)"/>
+      <circle cx="30" cy="42" r="14" fill="#F3E5F5"/>
+      <path d="M 24 38 L 30 44 L 38 36" fill="none" stroke="#673AB7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="58" y="34" font-size="11" fill="#673AB7" font-weight="700" letter-spacing="0.6">OWNERSHIP &amp; SUCCESSION</text>
+      <text x="58" y="55" font-size="12" fill="#3C4043">Human owner per agent</text>
+      <text x="58" y="71" font-size="12" fill="#5F6368">Fallback on offboarding</text>
+    </g>
 
-  <rect x="460" y="306" width="170" height="70" rx="6" fill="#F3E5F5" stroke="#673AB7" stroke-width="1"/>
-  <text x="545" y="325" font-size="11" fill="#673AB7" text-anchor="middle" font-weight="600">SoD &amp; ACCESS REVIEW</text>
-  <text x="545" y="345" font-size="11" fill="#5F6368" text-anchor="middle">Toxic combinations</text>
-  <text x="545" y="361" font-size="11" fill="#5F6368" text-anchor="middle">Agent + tool + data paths</text>
+    <!-- Capability card 2: Certification -->
+    <g transform="translate(286, 132)">
+      <rect width="244" height="84" rx="10" fill="#FFFFFF" stroke="#E0D7F5" stroke-width="1.2" filter="url(#cardShadow)"/>
+      <circle cx="30" cy="42" r="14" fill="#F3E5F5"/>
+      <rect x="22" y="34" width="16" height="17" rx="2" fill="none" stroke="#673AB7" stroke-width="1.8"/>
+      <line x1="25" y1="40" x2="35" y2="40" stroke="#673AB7" stroke-width="1.4"/>
+      <line x1="25" y1="44" x2="32" y2="44" stroke="#673AB7" stroke-width="1.4"/>
+      <text x="58" y="34" font-size="11" fill="#673AB7" font-weight="700" letter-spacing="0.6">CERTIFICATION</text>
+      <text x="58" y="55" font-size="12" fill="#3C4043">Quarterly campaigns</text>
+      <text x="58" y="71" font-size="12" fill="#5F6368">Attestation trail</text>
+    </g>
 
-  <rect x="640" y="306" width="170" height="70" rx="6" fill="#F3E5F5" stroke="#673AB7" stroke-width="1"/>
-  <text x="725" y="325" font-size="11" fill="#673AB7" text-anchor="middle" font-weight="600">UNIFIED GOVERNED VIEW</text>
-  <text x="725" y="345" font-size="11" fill="#5F6368" text-anchor="middle">Cross-platform</text>
-  <text x="725" y="361" font-size="11" fill="#5F6368" text-anchor="middle">queryable graph</text>
+    <!-- Capability card 3: SoD -->
+    <g transform="translate(542, 132)">
+      <rect width="244" height="84" rx="10" fill="#FFFFFF" stroke="#E0D7F5" stroke-width="1.2" filter="url(#cardShadow)"/>
+      <circle cx="30" cy="42" r="14" fill="#F3E5F5"/>
+      <path d="M 30 32 L 22 40 L 24 50 L 36 50 L 38 40 Z" fill="none" stroke="#673AB7" stroke-width="1.8" stroke-linejoin="round"/>
+      <line x1="30" y1="38" x2="30" y2="44" stroke="#673AB7" stroke-width="1.8" stroke-linecap="round"/>
+      <circle cx="30" cy="47.5" r="0.8" fill="#673AB7"/>
+      <text x="58" y="34" font-size="11" fill="#673AB7" font-weight="700" letter-spacing="0.6">SoD &amp; ACCESS REVIEW</text>
+      <text x="58" y="55" font-size="12" fill="#3C4043">Toxic combinations</text>
+      <text x="58" y="71" font-size="12" fill="#5F6368">Agent / tool / data paths</text>
+    </g>
 
-  <!-- Arrows from runtime to IGA -->
-  <line x1="252" y1="430" x2="252" y2="395" stroke="#5F6368" stroke-width="1.5" marker-end="url(#arrowUp)" transform="rotate(180 252 412.5)"/>
-  <line x1="450" y1="430" x2="450" y2="395" stroke="#5F6368" stroke-width="1.5" marker-end="url(#arrowUp)" transform="rotate(180 450 412.5)"/>
-  <line x1="648" y1="430" x2="648" y2="395" stroke="#5F6368" stroke-width="1.5" marker-end="url(#arrowUp)" transform="rotate(180 648 412.5)"/>
-  <text x="450" y="412" font-size="10" fill="#5F6368" text-anchor="middle" font-style="italic">native connectors  ·  /.well-known/agent-identity for self-hosted</text>
+    <!-- Capability card 4: Unified view -->
+    <g transform="translate(798, 132)">
+      <rect width="252" height="84" rx="10" fill="#FFFFFF" stroke="#E0D7F5" stroke-width="1.2" filter="url(#cardShadow)"/>
+      <circle cx="30" cy="42" r="14" fill="#F3E5F5"/>
+      <circle cx="25" cy="38" r="3" fill="none" stroke="#673AB7" stroke-width="1.6"/>
+      <circle cx="35" cy="38" r="3" fill="none" stroke="#673AB7" stroke-width="1.6"/>
+      <circle cx="30" cy="48" r="3" fill="none" stroke="#673AB7" stroke-width="1.6"/>
+      <line x1="27" y1="40" x2="29" y2="46" stroke="#673AB7" stroke-width="1.3"/>
+      <line x1="33" y1="40" x2="31" y2="46" stroke="#673AB7" stroke-width="1.3"/>
+      <line x1="28" y1="38" x2="32" y2="38" stroke="#673AB7" stroke-width="1.3"/>
+      <text x="58" y="34" font-size="11" fill="#673AB7" font-weight="700" letter-spacing="0.6">UNIFIED GOVERNED VIEW</text>
+      <text x="58" y="55" font-size="12" fill="#3C4043">Cross-platform query</text>
+      <text x="58" y="71" font-size="12" fill="#5F6368">Single identity graph</text>
+    </g>
+  </g>
 
-  <!-- Layer 1: Runtime -->
-  <rect x="72" y="438" width="756" height="170" rx="10" fill="#FFFFFF" stroke="#4285F4" stroke-width="1.6" filter="url(#softShadow)"/>
-  <rect x="72" y="438" width="756" height="42" rx="10" fill="#4285F4"/>
-  <text x="450" y="466" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="600" letter-spacing="1.5">LAYER 1 — RUNTIME GOVERNANCE</text>
+  <!-- ============ Connector between layers ============ -->
+  <g>
+    <line x1="240" y1="558" x2="240" y2="604" stroke="#9AA0A6" stroke-width="1.8" stroke-linecap="round"/>
+    <polygon points="240,614 234,604 246,604" fill="#9AA0A6"/>
+    <line x1="600" y1="558" x2="600" y2="604" stroke="#9AA0A6" stroke-width="1.8" stroke-linecap="round"/>
+    <polygon points="600,614 594,604 606,604" fill="#9AA0A6"/>
+    <line x1="960" y1="558" x2="960" y2="604" stroke="#9AA0A6" stroke-width="1.8" stroke-linecap="round"/>
+    <polygon points="960,614 954,604 966,604" fill="#9AA0A6"/>
+    <rect x="380" y="566" width="440" height="28" rx="14" fill="#FFFFFF" stroke="#DADCE0" stroke-width="1"/>
+    <text x="600" y="585" font-size="11" fill="#5F6368" text-anchor="middle">native platform connectors  ·  <tspan font-family="'Menlo','SF Mono',monospace" font-size="11">/.well-known/agent-identity</tspan> for self-hosted</text>
+  </g>
 
-  <text x="450" y="506" font-size="15" fill="#202124" text-anchor="middle" font-weight="500">Google Cloud — Vertex AI Agent Engine, IAM, Model Armor, Cloud Logging, SCC, Wiz</text>
+  <!-- ============ Layer 1: Runtime Governance ============ -->
+  <g transform="translate(60, 624)">
+    <rect width="1080" height="232" rx="18" fill="url(#bluePanel)" stroke="#D2E3FC" stroke-width="1.4" filter="url(#layerShadow)"/>
 
-  <!-- Runtime capability boxes -->
-  <rect x="100" y="524" width="170" height="70" rx="6" fill="#E8F0FE" stroke="#4285F4" stroke-width="1"/>
-  <text x="185" y="543" font-size="11" fill="#4285F4" text-anchor="middle" font-weight="600">AGENT IDENTITY</text>
-  <text x="185" y="563" font-size="11" fill="#5F6368" text-anchor="middle">SPIFFE / IAM principal</text>
-  <text x="185" y="579" font-size="11" fill="#5F6368" text-anchor="middle">per Agent Engine</text>
+    <!-- Layer header strip -->
+    <path d="M 0 18 Q 0 0 18 0 L 1062 0 Q 1080 0 1080 18 L 1080 56 L 0 56 Z" fill="url(#blueGrad)"/>
+    <text x="30" y="35" font-size="11" fill="#BBDEFB" font-weight="700" letter-spacing="2">LAYER 1</text>
+    <text x="30" y="48" font-size="13" fill="#FFFFFF" font-weight="400" letter-spacing="0.5">Runtime Governance</text>
 
-  <rect x="280" y="524" width="170" height="70" rx="6" fill="#E6F4EA" stroke="#34A853" stroke-width="1"/>
-  <text x="365" y="543" font-size="11" fill="#34A853" text-anchor="middle" font-weight="600">AUTHORIZATION</text>
-  <text x="365" y="563" font-size="11" fill="#5F6368" text-anchor="middle">IAM + A2A</text>
-  <text x="365" y="579" font-size="11" fill="#5F6368" text-anchor="middle">least privilege</text>
+    <!-- Product name centerpiece -->
+    <text x="540" y="90" font-size="18" fill="#202124" font-weight="600" text-anchor="middle">Google Cloud — Vertex AI Agent Engine</text>
+    <text x="540" y="111" font-size="13" fill="#1A73E8" font-weight="500" text-anchor="middle">IAM  ·  Model Armor  ·  Cloud Logging  ·  Security Command Center  ·  Wiz</text>
 
-  <rect x="460" y="524" width="170" height="70" rx="6" fill="#FEF7E0" stroke="#F9AB00" stroke-width="1"/>
-  <text x="545" y="543" font-size="11" fill="#F9AB00" text-anchor="middle" font-weight="600">RUNTIME PROTECTION</text>
-  <text x="545" y="563" font-size="11" fill="#5F6368" text-anchor="middle">Model Armor</text>
-  <text x="545" y="579" font-size="11" fill="#5F6368" text-anchor="middle">prompt + DLP</text>
+    <!-- Capability card 1: Agent Identity -->
+    <g transform="translate(30, 132)">
+      <rect width="244" height="84" rx="10" fill="#FFFFFF" stroke="#D2E3FC" stroke-width="1.2" filter="url(#cardShadow)"/>
+      <circle cx="30" cy="42" r="14" fill="#E8F0FE"/>
+      <circle cx="30" cy="38" r="4" fill="#4285F4"/>
+      <path d="M 22 50 Q 30 44 38 50 Q 38 54 30 54 Q 22 54 22 50 Z" fill="#4285F4"/>
+      <text x="58" y="34" font-size="11" fill="#1A73E8" font-weight="700" letter-spacing="0.6">AGENT IDENTITY</text>
+      <text x="58" y="55" font-size="12" fill="#3C4043">SPIFFE / IAM principal</text>
+      <text x="58" y="71" font-size="12" fill="#5F6368">per Agent Engine</text>
+    </g>
 
-  <rect x="640" y="524" width="170" height="70" rx="6" fill="#FCE8E6" stroke="#EA4335" stroke-width="1"/>
-  <text x="725" y="543" font-size="11" fill="#EA4335" text-anchor="middle" font-weight="600">EVIDENCE</text>
-  <text x="725" y="563" font-size="11" fill="#5F6368" text-anchor="middle">Cloud Logging, SCC</text>
-  <text x="725" y="579" font-size="11" fill="#5F6368" text-anchor="middle">+ Wiz cross-platform</text>
+    <!-- Capability card 2: Authorization -->
+    <g transform="translate(286, 132)">
+      <rect width="244" height="84" rx="10" fill="#FFFFFF" stroke="#CEEAD6" stroke-width="1.2" filter="url(#cardShadow)"/>
+      <circle cx="30" cy="42" r="14" fill="#E6F4EA"/>
+      <rect x="22" y="34" width="16" height="16" rx="2" fill="none" stroke="#34A853" stroke-width="1.8"/>
+      <path d="M 26 42 L 30 46 L 38 38" fill="none" stroke="#34A853" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="58" y="34" font-size="11" fill="#1E8E3E" font-weight="700" letter-spacing="0.6">AUTHORIZATION</text>
+      <text x="58" y="55" font-size="12" fill="#3C4043">IAM + A2A</text>
+      <text x="58" y="71" font-size="12" fill="#5F6368">least privilege</text>
+    </g>
+
+    <!-- Capability card 3: Runtime Protection -->
+    <g transform="translate(542, 132)">
+      <rect width="244" height="84" rx="10" fill="#FFFFFF" stroke="#FEEFC3" stroke-width="1.2" filter="url(#cardShadow)"/>
+      <circle cx="30" cy="42" r="14" fill="#FEF7E0"/>
+      <path d="M 30 32 L 38 36 L 36 48 Q 33 53 30 54 Q 27 53 24 48 L 22 36 Z" fill="none" stroke="#F9AB00" stroke-width="1.8" stroke-linejoin="round"/>
+      <text x="58" y="34" font-size="11" fill="#E37400" font-weight="700" letter-spacing="0.6">RUNTIME PROTECTION</text>
+      <text x="58" y="55" font-size="12" fill="#3C4043">Model Armor</text>
+      <text x="58" y="71" font-size="12" fill="#5F6368">prompt + DLP filters</text>
+    </g>
+
+    <!-- Capability card 4: Evidence -->
+    <g transform="translate(798, 132)">
+      <rect width="252" height="84" rx="10" fill="#FFFFFF" stroke="#FAD2CF" stroke-width="1.2" filter="url(#cardShadow)"/>
+      <circle cx="30" cy="42" r="14" fill="#FCE8E6"/>
+      <rect x="23" y="33" width="14" height="18" rx="1.5" fill="none" stroke="#EA4335" stroke-width="1.6"/>
+      <line x1="26" y1="38" x2="34" y2="38" stroke="#EA4335" stroke-width="1.3"/>
+      <line x1="26" y1="42" x2="34" y2="42" stroke="#EA4335" stroke-width="1.3"/>
+      <line x1="26" y1="46" x2="31" y2="46" stroke="#EA4335" stroke-width="1.3"/>
+      <text x="58" y="34" font-size="11" fill="#C5221F" font-weight="700" letter-spacing="0.6">EVIDENCE</text>
+      <text x="58" y="55" font-size="12" fill="#3C4043">Cloud Logging · SCC</text>
+      <text x="58" y="71" font-size="12" fill="#5F6368">Wiz cross-platform</text>
+    </g>
+  </g>
 </svg>
