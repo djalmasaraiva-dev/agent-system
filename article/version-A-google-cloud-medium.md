@@ -56,7 +56,7 @@ The team could answer it. Eventually. With trace IDs, log joins, and a full afte
 
 > Governance tells you the answer before the question is asked. Forensics is what helps you answer it after the auditor walks in.
 
-![Anatomy of a silent agent failure](figure-6-silent-failure-loop.svg)
+![Anatomy of a silent agent failure](figure-3-silent-failure-loop.svg)
 *Figure 3. The visible bug was a bad citation. The deeper failure was an agent identity with no clear human owner, review cadence, or accountability path.*
 
 ---
@@ -95,7 +95,7 @@ For enterprise teams shipping agents in 2026, this combination handles a substan
 
 The remaining gap is narrower, but important: identity lifecycle.
 
-![Google Cloud runtime governance stack](figure-7-gcp-runtime-stack.svg)
+![Google Cloud runtime governance stack](figure-4-gcp-runtime-stack.svg)
 *Figure 4. Google Cloud's runtime layer now gives architects a much stronger foundation: identity, authorization, runtime protection, logging, and security posture. Lifecycle ownership still sits above it.*
 
 ---
@@ -200,7 +200,7 @@ Identity lifecycle is the layer that still needs deliberate design.
 
 It's worth being precise about what Google's stack — including Wiz — covers, and what remains in partner ecosystem territory. The two are complementary, not competing.
 
-![Two layers, two scopes](figure-3-two-layers-two-scopes.svg)
+![Two layers, two scopes](figure-5-two-layers-two-scopes.svg)
 *Figure 5. Layer 1 (runtime governance and security posture) is increasingly well-served by Google Cloud and Wiz. Layer 2 (identity lifecycle governance) is where partner IGA fits.*
 
 **Layer 1: Runtime governance and security posture.** Agent Engine identity, IAM, A2A authorization, Gemini Enterprise agent management, logging, Model Armor, Security Command Center, and Wiz together cover much of this layer. They answer questions like: who is this agent? What is it allowed to do at runtime? What user, if any, delegated the action? What prompts and responses crossed the model boundary? What's the security posture of the cloud and SaaS environment around the agent?
@@ -299,7 +299,7 @@ Hit that endpoint against a live deployment and you get the JSON envelope an IGA
 
 **Pattern B: SaaS-hosted agents (Agentforce, Copilot Studio, Bedrock AgentCore).** You can't deploy a custom FastAPI route on a SaaS platform. Instead, the metadata flows through the platform's own admin API or governance plane. In practice, your IGA platform's native connector for that SaaS pulls the equivalent metadata using the platform's documented APIs, and the IGA normalizes it into the same envelope shape.
 
-![The bridge architecture](figure-4-bridge-architecture.svg)
+![The bridge architecture](figure-7-bridge-architecture.svg)
 *Figure 7. Native cryptographic identities from each platform are wrapped in a common metadata envelope, exposed at a well-known endpoint or pulled via platform APIs, and aggregated into a single IGA control plane.*
 
 This pattern wraps Google's Agent Engine identity in a portable envelope. The native IAM principal and underlying workload identity are preserved, then augmented with ownership, classification, lifecycle metadata, and business context that runtime identity systems do not normally store and were never designed to store.
@@ -318,7 +318,7 @@ When an engineer left the company, the HR system fired the offboarding event. Th
 
 When the next quarterly audit came around and the auditor asked the cross-platform question — *who can ultimately cause a write to that customer table?* — the team answered in twenty seconds with a graph query across the IGA's Identity Graph. The previous answer had taken an afternoon.
 
-![Audit answer as identity graph](figure-8-audit-answer-graph.svg)
+![Audit answer as identity graph](figure-9-audit-answer-graph.svg)
 *Figure 8. The auditor's question becomes tractable when human ownership, delegated user context, agent-to-agent calls, and target data scopes live in one graph.*
 
 A behavioural pattern that emerged alongside the audit story is worth naming, because it is the runtime consequence of the same architecture: **honest refusal**. When the agents respect their declared `data_scopes`, they decline questions that fall outside those scopes — and surface the limit explicitly to the user, rather than improvising.
@@ -329,10 +329,10 @@ In one of our test invocations of the reference implementation, an analyst asked
 
 The Layer 1 / Layer 2 boundary shows up not as an abstract architecture diagram, but as the closing paragraph of the agent's own response. The agent knows what it is, knows what it can read, and names what sits above it — IAM and security configuration — as somebody else's job.
 
-![ADK trace of a coordinator invocation](figure-9-trace.png)
+![ADK trace of a coordinator invocation](figure-10-trace.png)
 *Figure 9. ADK trace of a single coordinator invocation captured in the playground. The span tree shows the full call graph — coordinator → data_agent → list_tables → describe_table → bigquery_query — with per-span latency. The sidebar exposes the `invocation_id`, the agent name, and the per-session `rate_limit.count` written by the `before_model_callback`. Every visible row also lands in Cloud Logging as a structured JSON event, joinable by `invocation_id`.*
 
-![Agent response with honest refusal in Caveats](figure-10-honest-refusal.png)
+![Agent response with honest refusal in Caveats](figure-11-honest-refusal.png)
 *Figure 10. The reporter agent's final brief, materializing the architecture's intent. The bullets tag the source of each finding (`[data]`), the **Numbers** table makes cost transparent, and the **Caveats** section makes the Layer 1 boundary explicit — the agent knows what it cannot answer with the scope it was given.*
 
 When the platform team wanted to add a new shared agent, the certification cadence and ownership pattern were already in place. The new agent joined the same governance plane as everything else from day one. Within Google Cloud, Agent Engine identity, IAM, Gemini Enterprise agent management, logging, and Model Armor handled the runtime governance layer. Security Command Center and Wiz contributed security posture visibility. Above them, the partner IGA layer handled the human-organization lifecycle.
@@ -343,7 +343,7 @@ The agents kept doing useful work. The systems were still hard. What the team ha
 
 ## Where you might be in this journey
 
-![Decision matrix](figure-5-decision-matrix.svg)
+![Decision matrix](figure-12-decision-matrix.svg)
 *Figure 11. Native governance is enough for narrow scope. Most enterprise environments hit at least three of the right-hand criteria.*
 
 **Native Google Cloud governance — Agent Engine identity, IAM, Gemini Enterprise agent management, logging, Model Armor, plus security posture tooling such as Security Command Center and Wiz — can be enough when:**
