@@ -4,21 +4,17 @@
 
 **By Djalma Junior** (Head of Google Cloud Architecture, GFT Technologies).
 
-> **TL;DR**
-> - The current Google Cloud agent stack now solves the **runtime** identity problem cleanly: SPIFFE-anchored Agent Identity for Vertex AI Agent Engine, IAM + A2A authorization, Model Armor, Cloud Logging, plus Wiz for cross-platform posture.
-> - Companion open-source code (Apache 2.0): **[github.com/djalmasaraiva-dev/agent-system](https://github.com/djalmasaraiva-dev/agent-system)** — 4 ADK agents, cost-guarded BigQuery tool, `/.well-known/agent-identity` bridge with IAP JWT verification, 62 unit tests.
-
 > *This article synthesizes patterns I have observed across multiple Financial Services engagements with ADK and Gemini-based agentic systems on Google Cloud. Project IDs, table names, and agent owner identifiers in the snippets and figures are placeholders. Numerical claims — agent counts, audit-response times, dataset sizes — are representative of those engagements rather than a single customer.*
 
 ---
 
-## A 47-day bug, and the question we couldn't answer
+## A 60-day bug, and the question we couldn't answer
 
-The first agent we shipped to production ran for forty-seven days before anyone noticed the bug.
+The first agent we shipped to production ran for sixty days before anyone noticed the bug.
 
 It wasn't dramatic. The agent — a research assistant for the risk analytics team at an enterprise financial services customer — had been recommending document references that didn't quite exist. Hallucinated citations, written in confident prose, attached to outputs nobody reviewed line-by-line. The team only caught it when an analyst tried to look up one of those references for a regulator filing.
 
-Forty-seven days. The fix took an hour. The conversation it triggered took six months.
+Sixty days. The fix took an hour. The conversation it triggered took six months.
 
 The question that came out of that incident wasn't *how do we fix the agent?* It was: *Who owns this agent? What else is it doing? Would we even know if it failed differently next time?*
 
@@ -373,7 +369,7 @@ The threshold matters less than the trajectory. If you're going to scale agentic
 
 ## Closing
 
-The 47-day bug that started this story was, eventually, just a code change. The harder fix was the system around it: an agent without a documented owner, in production without a review cadence, on a platform that didn't have HR-side accountability built in. That class of incident — the one that wastes an afternoon on forensic reconstruction and surfaces a structural gap behind a tactical bug — is what the new governance stack is built to make rare.
+The 60-day bug that started this story was, eventually, just a code change. The harder fix was the system around it: an agent without a documented owner, in production without a review cadence, on a platform that didn't have HR-side accountability built in. That class of incident — the one that wastes an afternoon on forensic reconstruction and surfaces a structural gap behind a tactical bug — is what the new governance stack is built to make rare.
 
 The current Google Cloud agent stack materially narrows that gap. The remaining structural work — who owns the agent, when does it expire, has it been certified, can the auditor see the chain of approval across clouds — sits in the identity lifecycle layer.
 
