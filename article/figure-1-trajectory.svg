@@ -36,8 +36,8 @@
 
   <!-- Time labels below axis -->
   <text x="140" y="316" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle" letter-spacing="0.6">MONTH 0</text>
-  <text x="320" y="316" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle" letter-spacing="0.6">MONTH 6</text>
-  <text x="500" y="316" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle" letter-spacing="0.6">MONTH 9</text>
+  <text x="320" y="316" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle" letter-spacing="0.6">MONTH 2</text>
+  <text x="500" y="316" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle" letter-spacing="0.6">MONTH 11</text>
   <text x="680" y="316" class="sans" font-size="10" fill="#7A6E5C" text-anchor="middle" letter-spacing="0.6">MONTH 15</text>
 
   <!-- ===== Milestone 1: Month 0 ===== -->
