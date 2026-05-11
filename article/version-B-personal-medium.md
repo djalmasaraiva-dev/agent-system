@@ -35,14 +35,12 @@ The first is Gartner's. According to the [2026 CIO and Technology Executive Surv
 
 The second is from the [SailPoint and Dimensional Research survey](https://www.sailpoint.com/press-releases/sailpoint-ai-agent-adoption-report) "AI agents: the new attack surface" (May 2025), based on 353 technology professionals across five continents. The headline numbers:
 
-| Finding | Organizations |
-| --- | --- |
-| Have seen AI agents take unintended actions | **80%** |
-| State that governing AI agents is critical to security | **92%** |
-| View AI agents as a growing security threat | **96%** |
-| Say AI agents pose a greater risk than traditional machine identities | **72%** |
-| Already use AI agents in production | **82%** |
-| Have AI-agent-specific security policies in place | **44%** |
+- **80%** of organizations have already seen AI agents take unintended actions.
+- **92%** state that governing AI agents is critical to security.
+- **96%** view AI agents as a growing security threat.
+- **72%** say AI agents pose a greater risk than traditional machine identities.
+- **82%** already use AI agents in production.
+- **44%** have AI-agent-specific security policies in place.
 
 Those numbers match what I have been seeing in regulated financial services for the past two years.
 
